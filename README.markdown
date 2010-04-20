@@ -4,6 +4,15 @@ Provides assistance for setting up an auth solution using devise and cancan auth
 
 NOTICE: After a major refactoring effort, this gem has NOT finished and NOT been tested yet. I plan to create a test suite real soon...
 
+## Installation ##
+
+This gem has been designed for Rails 3 only. Any back port to Rails 2 is most welcome ;)
+
+Insert `gem 'auth-assistant'` in your Gemfile
+Run `bundle install`
+
+The gem should automatically configure itself with Rails after you run the `config` generator (see below).
+
 ## Generators ##
 
 ### Config Generator ###
