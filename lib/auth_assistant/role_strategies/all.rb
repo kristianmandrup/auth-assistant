@@ -1,0 +1,5 @@
+require 'auth_assistant/role_strategies/strategy_helper'
+require 'auth_assistant/role_strategies/rolefield'
+require 'auth_assistant/role_strategies/rolesfield'
+require 'auth_assistant/role_strategies/rolesmask'
+require 'auth_assistant/role_strategies/rolesmodel'
