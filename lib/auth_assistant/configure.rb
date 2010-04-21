@@ -1,8 +1,8 @@
-require 'helpers/all'
-require 'model/user_config'
-require 'role_strategies/all'
-require 'translate/authlabels'  
-require 'view/all'  
+require 'auth_assistant/helpers/all'
+require 'auth_assistant/model/user_config'
+require 'auth_assistant/role_strategies/all'
+require 'auth_assistant/translate/authlabels'  
+require 'auth_assistant/view/all'  
 
 module AuthAssistant
   
@@ -15,6 +15,10 @@ module AuthAssistant
       include AuthAssistant::Helpers::Roles
       include AuthAssistant::Helpers::LocalHost
       include AuthAssistant::Helpers::AuthLabel
+
+      include AuthAssistant::ViewHelpers::AuthLink
+      include AuthAssistant::ViewHelpers::RestLink      
+      include AuthAssistant::ViewHelpers::AuthMenuItem
     
       def self.included(base)
         base.extend ClassMethods
