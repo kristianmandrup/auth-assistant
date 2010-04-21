@@ -1,7 +1,7 @@
 module AuthAssistant
   module ViewHelpers
     module AuthLink                                                        
-      def sign_out_link(label = = auth_labels[:sign_out])
+      def sign_out_link(label = auth_labels[:sign_out])
         path = role == 'admin' ? destroy_admin_session_path : destroy_user_session_path
         link_to(label, path)
       end

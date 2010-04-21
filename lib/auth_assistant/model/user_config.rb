@@ -1,6 +1,6 @@
 module AuthAssistant
   def self.configure(&block)
-    # AuthAssistant::Model    
+    block.arity < 1 ? AuthAssistant::Model.class_eval(&block) : block.call(AuthAssistant::Model)   
   end
   
   module Model  

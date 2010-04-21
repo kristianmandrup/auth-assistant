@@ -26,6 +26,11 @@ module AuthAssistant
       def show_link(object, label = auth_labels[:show])
        link_to(label, object) if can?(:read, object)
       end
+      
+      alias_method :new_link, :create_link
+      alias_method :destroy_link, :delete_link
+      alias_method :update_link, :edit_link
+      alias_method :read_link, :show_link                  
     end    
   end
 end
