@@ -9,7 +9,16 @@ module AuthAssistant
 
       def create_initializer
         template "auth_assistant", "config/initializers"
-      end
+      end 
+
+      def run_migration
+        send :"#{name}_migration"          
+      end 
+
+      
+      protected
+        include MigrationHelper
+        
     end
   end
 end
