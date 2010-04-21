@@ -47,7 +47,7 @@ end
 
 if defined? ActionController
   ActionController::Base.class_eval do
-    include CanCan::ControllerAdditions
+    include AuthAssistant::ControllerAdditions
   end
 end
     
