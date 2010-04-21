@@ -1,3 +1,5 @@
+require 'generators/auth_assistant/migration_helper'
+
 module AuthAssistant
   module Generators
     class ClearGenerator < Rails::Generators::NamedBase       
@@ -47,7 +49,7 @@ module AuthAssistant
           file.replace str2, str1
         end
 
-        include MigrationHelper
+        include AuthAssistant::MigrationHelper
     end
   end
 end

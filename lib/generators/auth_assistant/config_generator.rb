@@ -1,3 +1,5 @@
+require 'generators/auth_assistant/migration_helper'
+
 module AuthAssistant
   module Generators
     class ConfigGenerator < Rails::Generators::NamedBase
@@ -14,10 +16,9 @@ module AuthAssistant
       def run_migration
         send :"#{name}_migration"          
       end 
-
       
       protected
-        include MigrationHelper
+        include AuthAssistant::MigrationHelper
         
     end
   end
