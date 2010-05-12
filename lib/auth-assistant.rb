@@ -1,1 +1,1 @@
-require 'auth_assistant\configure'
+require 'auth_assistant/configure'

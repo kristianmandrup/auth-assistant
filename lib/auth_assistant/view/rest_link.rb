@@ -9,7 +9,7 @@ module AuthAssistant
        link_to(label, [:edit, object]) if can?(:edit, object)
       end
 
-      def delete_link(object, options = {:label => = auth_labels[:delete], :confirm => = auth_labels[:confirm]})    
+      def delete_link(object, options = {:label => auth_labels[:delete], :confirm => auth_labels[:confirm]})    
         case options
         when String
           label = options

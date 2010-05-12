@@ -1,6 +1,6 @@
 module AuthAssistant
   module Helpers
-    module Localhost
+    module LocalHost
       def localhost_block(&block)
         with_output_buffer(&block) if localhost?      
       end  

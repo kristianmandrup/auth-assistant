@@ -1,6 +1,6 @@
 module AuthAssistant
   module Generators
-    class AbilityGenerator < Rails::Generators::Base
+    class AbilGenerator < Rails::Generators::Base
       desc "Generates ability model for can-can auth framework" 
 
       def self.source_root
@@ -8,7 +8,7 @@ module AuthAssistant
       end
 
       def create_ability_model
-        copy_file 'ability.rb', 'app/models'
+        copy_file 'ability.rb', 'app/models/ability.rb'
       end
 
     end

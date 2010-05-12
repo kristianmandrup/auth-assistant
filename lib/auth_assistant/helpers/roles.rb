@@ -1,4 +1,4 @@
-module DeviseAssistant 
+module AuthAssistant 
   module Helpers
     module Roles
       def roles_area(clazz, *user_roles, &block)

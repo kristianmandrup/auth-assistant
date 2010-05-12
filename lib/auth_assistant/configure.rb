@@ -1,6 +1,6 @@
 require 'auth_assistant/helpers/all'
 require 'auth_assistant/model/user_config'
-require 'auth_assistant/role_strategies/all'
+# require 'auth_assistant/role_strategies/all'
 require 'auth_assistant/translate/authlabels'  
 require 'auth_assistant/view/all'  
 

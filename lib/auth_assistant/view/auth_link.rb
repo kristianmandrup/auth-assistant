@@ -25,5 +25,6 @@ module AuthAssistant
       alias_method :register_link, :sign_up_link    
       alias_method :edit_profile_link, :edit_registration_link      
     end  
+    
   end
 end

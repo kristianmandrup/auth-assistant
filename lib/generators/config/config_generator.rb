@@ -23,7 +23,7 @@ module AuthAssistant
       end 
       
       protected
-        include AuthAssistant::MigrationHelper
+        include ::AuthAssistant::MigrationHelper
         
     end
   end
