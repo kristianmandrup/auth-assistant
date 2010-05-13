@@ -22,10 +22,10 @@ module AuthAssistant
       alias_method :register_menu_item, :sign_up_menu_item    
       alias_method :edit_profile_menu_item, :edit_registration_menu_item   
 
-      def self.included(base)
-        base.helper_method :sign_out_menu_item, :sign_in_menu_item, :sign_up_menu_item, :edit_registration_menu_item
-        base.helper_method :logout_menu_item, :login_menu_item, :register_menu_item, :edit_profile_menu_item
-      end
+      # def self.included(base)
+      #   base.helper_method :sign_out_menu_item, :sign_in_menu_item, :sign_up_menu_item, :edit_registration_menu_item
+      #   base.helper_method :logout_menu_item, :login_menu_item, :register_menu_item, :edit_profile_menu_item
+      # end
     end  
   end
 end

@@ -26,11 +26,8 @@ if defined? ActionController
     include AuthAssistant::Helpers::UserRole
     include AuthAssistant::Helpers::Roles
     include AuthAssistant::Helpers::LocalHost
-    include AuthAssistant::Helpers::AuthLabel
-    
-    include AuthAssistant::ViewHelpers::AuthLink
-    include AuthAssistant::ViewHelpers::RestLink        
-    include AuthAssistant::ViewHelpers::AuthMenuItem       
+    include AuthAssistant::Helpers::AuthLabel    
   end
+else
+    puts "ActionController not defined"  
 end
-    
