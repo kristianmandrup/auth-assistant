@@ -9,8 +9,13 @@ module AuthAssistant
       attr_accessor :available_roles
     
       def available_strategies
-        [:admin_field, :role_field, :roles_field, :role_masks, :role_assignment]
+        [:admin_field, :role_field, :roles_field, :roles_mask, :role_assignment]
       end              
+      
+      def strategy(name)
+        n = name.to_s
+        available_strategies.include?(n.to_sym) ? n.to_sym.inspect : ':roles_field'
+      end
     
       def role_strategy=(strategy)  
         raise UnknowStrategy, "unknown strategy: #{strategy.inspect}, must be one of: #{available_strategies.inspect}" if !available_strategies.include? strategy.to_sym      

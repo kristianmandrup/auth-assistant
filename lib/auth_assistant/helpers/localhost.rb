@@ -11,7 +11,12 @@ module AuthAssistant
   
       def localhost?
          ['localhost', '127.0.0.1'].include?(request.host)
-      end
+      end      
+      
+      def self.included(base)
+        base.helper_method :localhost_block, :not_localhost_block, :localhost?      
+      end         
+
     end
   end
 end

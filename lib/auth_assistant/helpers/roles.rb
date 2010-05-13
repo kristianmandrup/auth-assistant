@@ -24,6 +24,10 @@ module AuthAssistant
       def role?(*user_roles)
         devise_role?(user_roles) || cancan_role?(user_roles)
       end
+
+      def self.included(base)
+        base.helper_method :roles_block, :not_roles_block, :roles_area, :not_roles_area, :role? 
+      end
     
       protected
         def do_roles_area(clazz, &block)

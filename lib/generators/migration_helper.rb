@@ -1,5 +1,9 @@
-module AuthAssistant
+require 'rails/generators/migration'
+
+module AuthAssist
   module MigrationHelper
+    include Rails::Generators::Migration
+
     # DRY up!
     def clear_migration_role_field                
       say 'Generating clear migration for RoleField'
@@ -19,6 +23,11 @@ module AuthAssistant
 
     def roles_field_migration
       migration 'add_roles_field_to_user roles:string'
+    end
+
+    def migration(options)   
+      migration_template "migration.rb", "db/migrate/devise_create_#{table_name}"      
+      run "rails g migration #{options}"
     end
 
     def role_assignment_migration

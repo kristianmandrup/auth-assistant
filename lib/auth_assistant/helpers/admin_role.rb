@@ -1,3 +1,5 @@
+puts "AdminRole loaded"
+
 module AuthAssistant
   module Helpers
     module AdminRole
@@ -30,6 +32,10 @@ module AuthAssistant
           do_admin_area(&block)
         end
       end  
+
+      def self.included(base)
+        base.helper_method :admin_block, :not_admin_block, :admin_area, :not_admin_area, :admin_or_owner_block, :admin? 
+      end         
     
       protected
         def do_admin_area(&block)

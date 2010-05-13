@@ -21,10 +21,13 @@ module AuthAssistant
         with_output_buffer(&block) if !user? 
       end  
 
-
       def user?
         devise_user? || cancan_user?
       end
+        
+      def self.included(base)
+        base.helper_method :user_block, :not_user_block, :user_area, :not_user_area, :user? 
+      end         
     
       protected
         def do_user_area(&block)

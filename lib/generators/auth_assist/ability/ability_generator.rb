@@ -1,10 +1,10 @@
-module AuthAssistant
+module AuthAssist
   module Generators
-    class AbilGenerator < Rails::Generators::Base
+    class AbilityGenerator < Rails::Generators::Base
       desc "Generates ability model for can-can auth framework" 
 
       def self.source_root
-        @_devise_source_root ||= File.expand_path("../templates", __FILE__)
+        @source_root ||= File.expand_path("../../templates", __FILE__)
       end
 
       def create_ability_model
