@@ -13,6 +13,15 @@ Run `bundle install`
 
 The gem should automatically configure itself with Rails after you run the `config` generator (see below).
 
+To make the extra authentication view helpers accessible from your views
+
+# app/helpers/application_helper.rb
+
+module ApplicationHelper       
+  auth_assist_helpers
+end
+
+
 ## Generators ##
 
 ### Config Generator ###
@@ -31,6 +40,10 @@ Strategies with multiple roles for each user
 * roles_model
 
 Currently role groups are not supported. Feel free to provide an add-on to support this or integrate with an existing 'role group' solution.  
+
+Example use:
+
+$ rails g auth_assistant:config admin_field
 
 ### Clear Generator ###
 

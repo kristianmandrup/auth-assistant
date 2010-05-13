@@ -25,12 +25,6 @@ module AuthAssistant
       alias_method :register_link, :sign_up_link    
       alias_method :edit_profile_link, :edit_registration_link   
 
-      # 
-      # def self.included(base)
-      #   base.helper_method :sign_out_link, :sign_in_link, :sign_up_link, :edit_registration_link
-      #   base.helper_method :logout_link, :login_link, :register_link, :edit_profile_link
-      # end
-    end  
-    
+    end      
   end
 end

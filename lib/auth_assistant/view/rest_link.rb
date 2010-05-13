@@ -1,5 +1,3 @@
-require 'action_view/helpers/url_helper'
-
 module AuthAssistant
   module ViewHelpers
     module RestLink      
@@ -38,12 +36,6 @@ module AuthAssistant
       alias_method :destroy_link, :delete_link
       alias_method :update_link, :edit_link
       alias_method :read_link, :show_link                  
-
-      # 
-      # def self.included(base)  
-      #   base.helper_method :create_link, :delete_link, :edit_link, :show_link
-      #   base.helper_method :new_link, :destroy_link, :update_link, :read_link                        
-      # end
       
     end    
   end
