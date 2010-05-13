@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{auth-assistant}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
@@ -14,42 +14,54 @@ Gem::Specification.new do |s|
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.markdown"
+    "README.markdown"
   ]
   s.files = [
     ".DS_Store",
-     ".document",
-     ".gitignore",
-     "LICENSE",
-     "README.markdown",
-     "Rakefile",
-     "VERSION",
-     "auth-assistant.gemspec",
-     "config/locales/en.yml",
-     "lib/.DS_Store",
-     "lib/auth-assistant.rb",
-     "lib/auth_assistant/configure.rb",
-     "lib/auth_assistant/helpers/admin_role.rb",
-     "lib/auth_assistant/helpers/all.rb",
-     "lib/auth_assistant/helpers/localhost.rb",
-     "lib/auth_assistant/helpers/roles.rb",
-     "lib/auth_assistant/helpers/user_role.rb",
-     "lib/auth_assistant/model/user_config.rb",
-     "lib/auth_assistant/role_strategies/all.rb",
-     "lib/auth_assistant/role_strategies/role_assignment.rb",
-     "lib/auth_assistant/role_strategies/strategy_helper.rb",
-     "lib/auth_assistant/translate/authlabels.rb",
-     "lib/auth_assistant/view/all.rb",
-     "lib/auth_assistant/view/auth_link.rb",
-     "lib/auth_assistant/view/auth_menu_item.rb",
-     "lib/auth_assistant/view/rest_link.rb",
-     "lib/generators/.DS_Store",
-     "lib/generators/migration_helper.rb",
-     "spec/auth-assistant_spec.rb",
-     "spec/generators/ability_gen_spec.rb",
-     "spec/sandbox.rb",
-     "spec/spec.opts",
-     "spec/spec_helper.rb"
+    ".document",
+    ".gitignore",
+    "LICENSE",
+    "README.markdown",
+    "Rakefile",
+    "VERSION",
+    "auth-assistant.gemspec",
+    "config/locales/en.yml",
+    "lib/.DS_Store",
+    "lib/auth-assistant.rb",
+    "lib/auth_assistant/configure.rb",
+    "lib/auth_assistant/helpers/admin_role.rb",
+    "lib/auth_assistant/helpers/all.rb",
+    "lib/auth_assistant/helpers/localhost.rb",
+    "lib/auth_assistant/helpers/roles.rb",
+    "lib/auth_assistant/helpers/user_role.rb",
+    "lib/auth_assistant/model/user_config.rb",
+    "lib/auth_assistant/role_strategies/admin_field.rb",
+    "lib/auth_assistant/role_strategies/all.rb",
+    "lib/auth_assistant/role_strategies/role_assignment.rb",
+    "lib/auth_assistant/role_strategies/role_field.rb",
+    "lib/auth_assistant/role_strategies/roles_field.rb",
+    "lib/auth_assistant/role_strategies/roles_mask.rb",
+    "lib/auth_assistant/role_strategies/strategy_helper.rb",
+    "lib/auth_assistant/translate/authlabels.rb",
+    "lib/auth_assistant/view/all.rb",
+    "lib/auth_assistant/view/auth_link.rb",
+    "lib/auth_assistant/view/auth_menu_item.rb",
+    "lib/auth_assistant/view/rest_link.rb",
+    "lib/generators/.DS_Store",
+    "lib/generators/auth_assist/.DS_Store",
+    "lib/generators/auth_assist/ability/.DS_Store",
+    "lib/generators/auth_assist/ability/ability_generator.rb",
+    "lib/generators/auth_assist/clear/clear_generator.rb",
+    "lib/generators/auth_assist/config/.DS_Store",
+    "lib/generators/auth_assist/config/config_generator.rb",
+    "lib/generators/auth_assist/templates/ability.rb",
+    "lib/generators/auth_assist/templates/auth_assistant.rb",
+    "lib/generators/migration_helper.rb",
+    "spec/auth-assistant_spec.rb",
+    "spec/generators/ability_gen_spec.rb",
+    "spec/sandbox.rb",
+    "spec/spec.opts",
+    "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/kristianmandrup/devise-assistant}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -58,9 +70,9 @@ Gem::Specification.new do |s|
   s.summary = %q{Provides assistance for setting up an auth solution}
   s.test_files = [
     "spec/auth-assistant_spec.rb",
-     "spec/generators/ability_gen_spec.rb",
-     "spec/sandbox.rb",
-     "spec/spec_helper.rb"
+    "spec/generators/ability_gen_spec.rb",
+    "spec/sandbox.rb",
+    "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then

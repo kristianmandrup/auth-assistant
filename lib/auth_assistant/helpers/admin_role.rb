@@ -1,5 +1,3 @@
-puts "AdminRole loaded"
-
 module AuthAssistant
   module Helpers
     module AdminRole

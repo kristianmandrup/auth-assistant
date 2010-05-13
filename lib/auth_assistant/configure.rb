@@ -1,6 +1,5 @@
 require 'auth_assistant/helpers/all'
 require 'auth_assistant/model/user_config'
-# require 'auth_assistant/role_strategies/all'
 require 'auth_assistant/translate/authlabels'  
 require 'auth_assistant/view/all'  
 
@@ -31,9 +30,7 @@ if defined? ActionController
     
     include AuthAssistant::ViewHelpers::AuthLink
     include AuthAssistant::ViewHelpers::RestLink        
-    include AuthAssistant::ViewHelpers::AuthMenuItem   
-    
-    # include ActionView::Helpers::UrlHelper
+    include AuthAssistant::ViewHelpers::AuthMenuItem       
   end
 end
     
