@@ -2,7 +2,7 @@
 
 Provides assistance for setting up an auth solution using devise and cancan auth frameworks.
 
-NOTICE: After a major refactoring effort, this gem has NOT finished and NOT been tested yet. I plan to create a test suite real soon...
+Note: The gem seems to be working now. More testing needed. Please report any issues.
 
 ## Installation ##
 
