@@ -2,7 +2,7 @@
 
 Provides assistance for setting up an auth solution using devise and cancan auth frameworks.
 
-## Installation ##
+## Installation and configuration ##
 
 This gem has been designed for Rails 3 only. Any back port to Rails 2 is most welcome ;)
 
