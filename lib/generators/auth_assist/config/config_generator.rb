@@ -9,20 +9,33 @@ module AuthAssist
       class_option :devise, :type => :boolean, :aliases => "-d", :default => false,
                                      :desc => "Initialize devise."
 
+      class_option :admin, :type => :boolean, :aliases => "-a", :default => false,
+                                    :desc => "Creae admin user."
+
+
       class_option :migration, :type => :boolean, :aliases => "-m", :default => false,
                                      :desc => "To generate a user role migration."
             
       def self.source_root
         @source_root ||= File.expand_path("../../templates", __FILE__)
       end
+
+      def init_devise
+        return if !options[:devise]
+        run 'rails g devise_install'        
+        run 'rails g devise User'
+      end
       
       def create_initializer
-        if options[:devise]
-          run 'rails g devise_install'        
-          run 'rails g devise User'
-        end
         template "auth_assistant.rb", "config/initializers/auth_assistant.rb"
       end 
+
+      def create_admin_user
+        return if !options[:admin]
+        run 'rails g devise Admin' if options[:admin]                
+        # use STI
+        gsub_file 'app/models/admin.rb', /ActiveRecord::Base/, 'User'        
+      end
 
       def copy_locale
         locale_file = File.expand_path("../../../../../config/locales/en.yml", __FILE__)
