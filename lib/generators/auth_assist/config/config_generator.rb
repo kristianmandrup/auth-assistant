@@ -30,6 +30,10 @@ module AuthAssist
         template "auth_assistant.rb", "config/initializers/auth_assistant.rb"
       end 
 
+      def create_ability_model
+        copy_file 'ability.rb', 'app/models/ability.rb'
+      end
+
       def create_admin_user
         return if !options[:admin]
         run 'rails g devise Admin' if options[:admin]                
