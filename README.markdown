@@ -26,6 +26,8 @@ end
 
 ### Config Generator ###
 
+The `config` generator generates a configuration initializer file for setting up `auth_assistant` to use a particular role strategy.
+
 `$ rails g auth_assistant:config NAME`
 
 NAME is the name of a role strategy. 
@@ -70,10 +72,6 @@ This allows you to easily change role strategy by first running the `clear` gene
 The `ability` generator generates a skeleton for the ability.rb model file for use with `cancan`.
 
 `$ rails g auth_assistant:ability`
-
-The `config` generator generates a configuration initializer file for setting up `auth_assistant` to use a particular role strategy.
-A migration can also be generated to add the appropriate field to the User model (or to add and connect a Role model). 
-
 
 
 == Note on Patches/Pull Requests
