@@ -41,9 +41,22 @@ Strategies with multiple roles for each user
 
 Currently role groups are not supported. Feel free to provide an add-on to support this or integrate with an existing 'role group' solution.  
 
-Example use:
+Example usage:
 
 $ rails g auth_assistant:config admin_field
+
+Also ensure devise is setup and configured
+
+$ rails g auth_assistant:config roles_mask --devise
+
+To also create an administrator model using STI to inherit and override the basic user strategies
+
+$ rails g auth_assistant:config roles_field --administrator
+
+To ensure a user model migration is generated
+
+$ rails g auth_assistant:config role_field --migration
+
 
 ### Clear Generator ###
 
