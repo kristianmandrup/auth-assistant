@@ -73,6 +73,25 @@ The `ability` generator generates a skeleton for the ability.rb model file for u
 
 `$ rails g auth_assistant:ability`
 
+### Views Generator ###
+
+The `views` generator generates views (partials) for use with Menus. 
+
+`$ rails g auth_assistant:views` 
+
+Create HAML views
+
+`$ rails g auth_assistant:views --template_engine haml'
+
+Example usage:
+<pre>
+  ul.menu
+    render 'auth_assist/login_items'                              
+    render 'auth_assist/registration_items'
+
+  ul.admin_menu_
+    render 'auth_assist/admin_login_items'
+</pre>
 
 == Note on Patches/Pull Requests
  
