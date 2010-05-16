@@ -4,12 +4,14 @@ Provides assistance for setting up an auth solution using devise and cancan auth
 
 ## Installation and configuration ##
 
-This gem has been designed for Rails 3 only. Any back port to Rails 2 is most welcome ;)
+This gem has been designed for Rails 3 only.
 
 Insert `gem 'auth-assistant'` in your Gemfile
-Run `bundle install`
+Run `$ bundle install`
 
-The gem should automatically configure itself with Rails after you run the `config` generator (see below).
+The gem should automatically configure itself with Rails after you run the `config` generator (see below). 
+
+`$ rails g auth_assist:config NAME` where NAME is the name of the role strategy to be used.
 
 To make the extra authentication view helpers accessible from your views
 
@@ -211,19 +213,19 @@ Currently role groups are not supported. Feel free to provide an add-on to suppo
 
 Example usage:
 
-$ rails g auth_assistant:config admin_field
+$ rails g auth_assist:config admin_field
 
 Also ensure devise is setup and configured
 
-$ rails g auth_assistant:config roles_mask --devise
+$ rails g auth_assist:config roles_mask --devise
 
 To also create an administrator model using STI to inherit and override the basic user strategies
 
-$ rails g auth_assistant:config roles_field --administrator
+$ rails g auth_assist:config roles_field --administrator
 
 To ensure a user model migration is generated
 
-$ rails g auth_assistant:config role_field --migration
+$ rails g auth_assist:config role_field --migration
 
 
 ### Clear Generator ###
@@ -231,7 +233,7 @@ $ rails g auth_assistant:config role_field --migration
 The `clear` generator removes any existing strategy file and optionally generates a migration to remove any tables and fields related to the existing role strategy.
 This allows you to easily change role strategy by first running the `clear` generator and then the `config` generator with a new strategy.
 
-`$ rails g auth_assistant:clear`                              
+`$ rails g auth_assist:clear`                              
 
 ### Views Generator ###
 
@@ -241,7 +243,7 @@ The `views` generator generates views (partials) for use with Menus.
 
 Create HAML views
 
-`$ rails g auth_assistant:views --template_engine haml'
+`$ rails g auth_assist:views --template_engine haml'
 
 Example usage:
 <pre>
