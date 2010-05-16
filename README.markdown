@@ -26,7 +26,24 @@ end
 Authorization is setup by designing permits for each can of role to do certain actions.
 The config generator generates a default permits.rb file in /lib
 
+Example:
+<pre>
+module RolePermit
+  class Moderator
+    def initialize(ability)
+      super
+    end
 
+    def permit?(user)
+      super
+      return if !user.role?(:moderator)
+      can :read, :all    
+      # can manage comment instance if 'user' or 'owner' field on instance points to this user, marking ownership
+      user.owns(Comment) 
+    end  
+  end
+end
+</pre>
 
 ## View helpers ##
 

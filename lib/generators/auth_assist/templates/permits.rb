@@ -1,46 +1,84 @@
 module RolePermit
-  class Admin
-    def initialize
+
+  class Base 
+    attr_accessor :ability
+       
+    def initialize(ability)
+      @ability = ability
     end
+
+    def can(action, subject, conditions = nil, &block)
+      ability.can_definitions << CanDefinition.new(true, action, subject, conditions, block)
+    end
+        
+    def cannot(action, subject, conditions = nil, &block)
+      ability.can_definitions << CanDefinition.new(false, action, subject, conditions, block)
+    end
+    
+    def owns(user, clazz)
+      can :manage, clazz do |comment|
+        comment.try(:user) == user || comment.try(:owner) == user
+      end                
+    end 
+    
+    def permit(user)
+      user.has ability      
+    end
+  end
   
+  class Admin < Base
+    def initialize(ability)
+      super
+    end
+
     def permit?(user)
       return if !user.role? :admin    
       can :manage, :all    
     end  
   end
 
-  class User
-    def initialize
+  class User < Base
+    def initialize(ability)
+      super
     end
 
-    def permit?(user)
+    def permit?(user) 
+      super
       return if user.role? :admin
-      can :read, :all     
+      can :read, :all           
+      
+      # user.owns(Comment)
+      
       # a user can manage comments he/she created
       # can :manage, Comment do |comment|
       #   comment.try(:user) == user
       # end            
+      
       # can :create, Comment
     end  
   end
 
-  class Moderator
-    def initialize
+  class Moderator < Base
+    def initialize(ability)
+      super
     end
-
+    
     def permit?(user)
+      super
       return if !user.role?(:moderator)
-      can :read, :all
-      # can :manage, Comment
+      can :read, :all      
+      # owns(user, Comment)
     end  
   end
 
 
-  class Author
-    def initialize
+  class Author < Base
+    def initialize(ability)
+      super
     end
-  
+    
     def permit?(user)     
+      super      
       return if !user.role? :author
       # can :create, Post
 
