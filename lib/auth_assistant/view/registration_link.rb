@@ -4,12 +4,14 @@ module AuthAssistant
 
       def sign_up_link(options = {})
         label = options[:label] || auth_labels[:sign_up]
-        get_link(label, registration_path options[:role])
+        path = registration_path options[:role]
+        link_to(label, path)
       end
 
-      def edit_registration_link(options = {})  
-        label = options[:label] || auth_labels[:edit_registration]
-        get_link(label, edit_registration_path options[:role])
+      def edit_registration_link(options = {})
+        label = options[:label] || auth_labels[:edit_registration]
+        path = edit_registration_path options[:role]
+        link_to(label, path)
       end
 
       alias_method :register_link, :sign_up_link    

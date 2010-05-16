@@ -1,0 +1,7 @@
+May 16, 2010
+---
+Support for standard roles
+* admin (all)
+* moderator
+* author
+* guest (default nil user)

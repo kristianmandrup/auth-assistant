@@ -32,6 +32,7 @@ module AuthAssist
 
       def create_ability_model
         copy_file 'ability.rb', 'app/models/ability.rb'
+        copy_file 'permits.rb', 'lib/permits.rb'
       end
 
       def create_admin_user

@@ -21,6 +21,13 @@ module ApplicationHelper
   auth_assist_helpers
 end
 
+## Permits ##
+
+Authorization is setup by designing permits for each can of role to do certain actions.
+The config generator generates a default permits.rb file in /lib
+
+
+
 ## View helpers ##
 
 Currently the view helpers only target use with devise and cancan.

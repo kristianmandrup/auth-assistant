@@ -3,12 +3,14 @@ module AuthAssistant
     module SessionLink                                                        
       def sign_out_link(options = {})
         label = options[:label] || auth_labels[:sign_out]
-        get_link(label, destroy_session_path options[:role])
+        path = destroy_session_path options[:role]
+        link_to(label, path)
       end
 
       def sign_in_link(label, options = {})  
         label = options[:label] || auth_labels[:sign_in]
-        get_link(label, create_session_path options[:role])
+        path = create_session_path options[:role]
+        link_to(label, path)
       end
 
       alias_method :log_out_link, :sign_out_link

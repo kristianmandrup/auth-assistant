@@ -2,11 +2,27 @@ module AuthAssistant
   module ViewHelpers
     module RestLink      
       def index_link(object, label = nil)
-        label ||= auth_labels[:new] 
-        path = send :"#{object.class.to_s.pluralize.downcase}_path"    
+        label ||= auth_labels[:new]                   
+        puts object.inspect        
+        obj = index_obj(object)
+        puts "index obj: #{obj.inspect}"   
+        path = send :"#{obj}_path"    
         link = link_to(label, path) if can?(:read, object)
       end      
       
+      def index_obj(obj)
+        o = case obj
+        when Array 
+          obj.first.class
+        when Class
+          obj
+        else
+          obj.class
+        end 
+        o.name.pluralize.downcase
+      end
+      
+            
       def create_link(object, label = nil)
         label ||= auth_labels[:new] 
         path = send :"new_#{object.class.to_s.downcase}_path"    
