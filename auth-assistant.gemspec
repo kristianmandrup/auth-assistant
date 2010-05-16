@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2010-05-13}
+  s.date = %q{2010-05-16}
   s.description = %q{Provides assistance for setting up an auth solution using devise and cancan auth frameworks}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
@@ -24,6 +24,11 @@ Gem::Specification.new do |s|
     "README.markdown",
     "Rakefile",
     "VERSION",
+    "app/.DS_Store",
+    "app/views/.DS_Store",
+    "app/views/auth_assist/menu/_admin_login_items.html.erb",
+    "app/views/auth_assist/menu/_login_items.html.erb",
+    "app/views/auth_assist/menu/_registration_items.html.erb",
     "auth-assistant.gemspec",
     "config/locales/en.yml",
     "lib/.DS_Store",
@@ -44,18 +49,18 @@ Gem::Specification.new do |s|
     "lib/auth_assistant/role_strategies/strategy_helper.rb",
     "lib/auth_assistant/translate/authlabels.rb",
     "lib/auth_assistant/view/all.rb",
-    "lib/auth_assistant/view/auth_link.rb",
     "lib/auth_assistant/view/auth_menu_item.rb",
+    "lib/auth_assistant/view/registration_link.rb",
     "lib/auth_assistant/view/rest_link.rb",
+    "lib/auth_assistant/view/session_link.rb",
     "lib/generators/.DS_Store",
     "lib/generators/auth_assist/.DS_Store",
-    "lib/generators/auth_assist/ability/.DS_Store",
-    "lib/generators/auth_assist/ability/ability_generator.rb",
     "lib/generators/auth_assist/clear/clear_generator.rb",
     "lib/generators/auth_assist/config/.DS_Store",
     "lib/generators/auth_assist/config/config_generator.rb",
     "lib/generators/auth_assist/templates/ability.rb",
     "lib/generators/auth_assist/templates/auth_assistant.rb",
+    "lib/generators/auth_assist/views/views_generator.rb",
     "lib/generators/migration_helper.rb",
     "spec/auth-assistant_spec.rb",
     "spec/generators/ability_gen_spec.rb",

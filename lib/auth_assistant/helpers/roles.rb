@@ -1,14 +1,16 @@
 module AuthAssistant 
   module Helpers
     module Roles
-      def roles_area(*user_roles, options = {}, &block)
+      def roles_area(*user_roles, options, &block)
+        options ||= {}
         roles_block user_roles do             
           clazz = options[:class] || 'special'          
           do_roles_area(clazz, &block)
         end
       end  
 
-      def not_roles_area(*user_roles, options = {}, &block)
+      def not_roles_area(*user_roles, options, &block)
+        options ||= {}        
         not_roles_block user_roles do             
           clazz = options[:class] || 'special'
           do_roles_area(clazz, &block)
