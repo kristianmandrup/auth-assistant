@@ -7,16 +7,12 @@ module RolePermit
       @ability = ability
     end
 
-    def permit?(user) 
-      user.has ability      
-    end
-
     def can(action, subject, conditions = nil, &block)
-      ability.can_definitions << CanDefinition.new(true, action, subject, conditions, block)
+      ability.can(action, subject, conditions, &block)
     end
         
     def cannot(action, subject, conditions = nil, &block)
-      ability.can_definitions << CanDefinition.new(false, action, subject, conditions, block)
+      ability.cannot(action, subject, conditions, &block)
     end
     
     def owns(user, clazz)
@@ -25,6 +21,9 @@ module RolePermit
       end                
     end 
     
+    def permit?(user)    
+      user.has ability      
+    end
   end
   
   class Admin < Base

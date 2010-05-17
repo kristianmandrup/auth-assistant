@@ -1,7 +1,6 @@
 module AuthAssistant          
   module RoleStrategy
     module RoleField
-      scope :with_role, lambda { |role| {:conditions => "role?(#{role})"} }
       
       def roles=(*roles)
         new_role = roles.first.to_s
@@ -10,6 +9,20 @@ module AuthAssistant
 
       def roles
         [role]
+      end
+
+      def role?(_role)
+        roles.include? _role
+      end  
+
+      module ClassMethods
+        def set_scope
+          scope :with_role, lambda { |role| {:conditions => "role?(#{role})"} }
+        end
+      end
+      
+      def self.included(base)  
+        base.extend(ClassMethods)
       end
 
     end

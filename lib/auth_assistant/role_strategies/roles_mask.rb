@@ -1,7 +1,6 @@
 module AuthAssistant           
   module RoleStrategy
     module RolesMask
-      scope :with_role, lambda { |role| {:conditions => "roles_mask & #{calc_index(role.to_s)} > 0"} }
 
       def roles=(*roles)        
         self.roles_mask = (roles & available_roles).map { |r| calc_index(r) }.sum
@@ -14,6 +13,16 @@ module AuthAssistant
       def role?(role)
         roles.include? role.to_s
       end      
+
+      module ClassMethods
+        def set_scope
+          scope :with_role, lambda { |role| {:conditions => "roles_mask & #{calc_index(role.to_s)} > 0"} }
+        end
+      end
+      
+      def self.included(base)  
+        base.extend(ClassMethods)
+      end
       
       protected 
         def calc_index(r)

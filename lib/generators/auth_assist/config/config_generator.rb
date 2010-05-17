@@ -27,7 +27,8 @@ module AuthAssist
       end
       
       def create_initializer
-        template "auth_assistant.rb", "config/initializers/auth_assistant.rb"
+        # prefixing with x should make sure it is run after devise initializer
+        template "auth_assistant.rb", "config/initializers/x_auth_assistant.rb"
       end 
 
       def create_ability_model

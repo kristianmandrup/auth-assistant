@@ -2,7 +2,7 @@ module AuthAssistant
   module ViewHelpers
     module RestLink      
       def index_link(object, label = nil)
-        label ||= auth_labels[:new]                   
+        label ||= auth_labels[:index]                   
         puts object.inspect        
         obj = index_obj(object)
         puts "index obj: #{obj.inspect}"   
@@ -51,7 +51,12 @@ module AuthAssistant
 
       def show_link(object, label = nil) 
         label ||= auth_labels[:show] 
-        link_to(label, object)  if can?(:read, object)
+        if can?(:read, object)
+          puts "can read: #{object}"
+          link_to(label, object)  
+        else
+          puts "no link"
+        end
       end
       
       alias_method :list_link, :index_link

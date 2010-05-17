@@ -1,4 +1,4 @@
-require 'auth_assistant/role_strategies/strategy_helper'
+require 'auth_assistant/role_strategies/shared'
 require 'auth_assistant/role_strategies/admin_field'
 require 'auth_assistant/role_strategies/role_field'
 require 'auth_assistant/role_strategies/roles_field'

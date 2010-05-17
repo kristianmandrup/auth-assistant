@@ -2,6 +2,7 @@ en:
   auth_assistant:
     confirm: 'Are you sure?'
     actions:  
+      index: "Index"
       new: "New"
       edit: "Edit"
       delete: "Delete"

@@ -1,4 +1,4 @@
-module AuthAsist
+module AuthAssist
   module Generators
     class ViewsGenerator < Rails::Generators::Base
       desc "Copies all AuthAssist views to your application."

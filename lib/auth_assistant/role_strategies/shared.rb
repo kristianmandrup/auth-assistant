@@ -1,6 +1,6 @@
 module AuthAssistant    
   module RoleStrategy
-    module Helper
+    module Shared
       attr_accessor :ability
       
       def admin?

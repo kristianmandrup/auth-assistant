@@ -1,8 +1,7 @@
 module AuthAssistant          
   module RoleStrategy
     module AdminField
-      scope :with_role, lambda { |role| {:conditions => ["role == ?", role]} }
-      
+            
       def roles=(*roles)
         new_role = roles.first.to_s
         self.admin = new_role == 'admin'
@@ -17,12 +16,22 @@ module AuthAssistant
       end
 
       def role
-        admin? ? 'admin' : 'default' 
+        admin == true ? 'admin' : 'default' 
       end
 
-      def role?(role)
-        self.role == role
-      end            
+      def role?(_role)
+        role == _role.to_s
+      end  
+
+      module ClassMethods
+        def set_scope
+          scope :with_role, lambda { |role| {:conditions => ["role == ?", role]} }
+        end
+      end
+      
+      def self.included(base)  
+        base.extend(ClassMethods)
+      end          
     end
   end
 end
