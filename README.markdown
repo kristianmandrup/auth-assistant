@@ -227,11 +227,12 @@ NAME is the name of a role strategy.
 Strategies with a single role for each user
 * admin_field
 * role_field
+* role_assignment
 
 Strategies with multiple roles for each user
 * roles_field
 * roles_mask
-* roles_model
+* multi_role_assignment
 
 Currently role groups are not supported. Feel free to provide an add-on to support this or integrate with an existing 'role group' solution.  
 

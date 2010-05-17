@@ -55,7 +55,7 @@ module AuthAssist
       end 
 
       def self.banner
-        "#{$0} auth_assist:config strategy [admin_field, role_field, roles_field, roles_mask, role_assignment]"
+        "#{$0} auth_assist:config strategy [admin_field, role_field, roles_field, roles_mask, role_assignment, multi_role_assignment]"
       end
       
       protected

@@ -32,6 +32,13 @@ module AuthAssist
 
     def role_assignment_migration
       run 'rails g model role name:string'
+
+      write_model_file('role', role_file_content)      
+      insert_model_file('user', user_file_content)
+    end            
+
+    def multi_role_assignment_migration
+      run 'rails g model role name:string'
       run 'rails g model role_assigment user_id:integer role_id:integer'          
 
       write_model_file('role', role_file_content)
@@ -39,6 +46,7 @@ module AuthAssist
       
       insert_model_file('user', user_file_content)
     end            
+
 
     protected
       def model_file(name)                          

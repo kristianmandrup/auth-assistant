@@ -11,7 +11,7 @@ module AuthAssistant
       attr_accessor :available_roles
     
       def available_strategies
-        [:admin_field, :role_field, :roles_field, :roles_mask, :role_assignment]
+        [:admin_field, :role_field, :roles_field, :roles_mask, :role_assignment, :multi_role_assignment]
       end              
       
       def strategy(name)
