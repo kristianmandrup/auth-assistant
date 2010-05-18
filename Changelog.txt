@@ -1,37 +1,24 @@
-May 17, 2010
+May 18, 2010
 ---
+v.0.4.0
 
-Can Can 1.1 support
-http://wiki.github.com/ryanb/cancan/upgrading-to-11
+CanCan 1.1 support http://wiki.github.com/ryanb/cancan/upgrading-to-11
 
-New Features
-Conditions Hash
+General:
+* Configuration now done through AuthAssistant::Configuration, a singleton
+* Fixed various bugs
+* Tested that generators work for all strategies and that rails can start up after any generation!
 
-Abilities can now be restricted using a conditions hash instead of a Ruby block. For example, if you previously had this.
+Generators:
+* Fixed various bugs
+* Completed generators refactoring to ensure more elegant/generic and enhanceable generators solution 
+* Added generator strategy classes for each strategy with API for generation and reversal of the strategy
 
-can :update, Article do |article|
-  article && article.user == user && article.visible?
-end
+Permits:
+* Now uses the new hash option for Permit 'ownership' (see owns function in Permit::Base)
+* Added request as second argument to Ability and Permits permit? method to enable construction of more advanced permits (1) 
 
-You can now do this.
-
-can :update, Article, :visible => true, :user_id => user.id
-
-The block is still available but I encourage you to use condition hashes whenever possible because it can be used in database queries.
-
-See Defining Abilities with Hashes for more information.
-Fetching Records
-
-One of the biggest limitations of CanCan in the past was that it was not possible to use the Ability logic in a database query to fetch only the readable records. With the addition of condition hashes to define abilities it is now possible to use that in the database through the added accessible_by scope in Active Record.
-
-# in controller
-@articles = Article.accessible_by(current_ability)
-
-This will only fetch the articles which the current user has read access to. If you are not using Active Record you can access the conditions hash directly.
-
-current_ability.conditions(:read, Article)
-
-
+(1) See 'request' example in http://wiki.github.com/ryanb/cancan/defining-abilities-with-blocks)
 
 May 16, 2010
 ---
