@@ -1,7 +1,43 @@
+May 17, 2010
+---
+
+Can Can 1.1 support
+http://wiki.github.com/ryanb/cancan/upgrading-to-11
+
+New Features
+Conditions Hash
+
+Abilities can now be restricted using a conditions hash instead of a Ruby block. For example, if you previously had this.
+
+can :update, Article do |article|
+  article && article.user == user && article.visible?
+end
+
+You can now do this.
+
+can :update, Article, :visible => true, :user_id => user.id
+
+The block is still available but I encourage you to use condition hashes whenever possible because it can be used in database queries.
+
+See Defining Abilities with Hashes for more information.
+Fetching Records
+
+One of the biggest limitations of CanCan in the past was that it was not possible to use the Ability logic in a database query to fetch only the readable records. With the addition of condition hashes to define abilities it is now possible to use that in the database through the added accessible_by scope in Active Record.
+
+# in controller
+@articles = Article.accessible_by(current_ability)
+
+This will only fetch the articles which the current user has read access to. If you are not using Active Record you can access the conditions hash directly.
+
+current_ability.conditions(:read, Article)
+
+
+
 May 16, 2010
 ---
 Support for standard roles
 * admin (all)
-* moderator
-* author
+* user (all)
 * guest (default nil user)
+
+

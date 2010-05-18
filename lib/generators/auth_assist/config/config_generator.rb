@@ -13,7 +13,7 @@ module AuthAssist
                                     :desc => "Creae admin user."
 
 
-      class_option :migration, :type => :boolean, :aliases => "-m", :default => false,
+      class_option :migration, :type => :boolean, :aliases => "-m", :default => true,
                                      :desc => "To generate a user role migration."
             
       def self.source_root
@@ -58,7 +58,13 @@ module AuthAssist
         "#{$0} auth_assist:config strategy [admin_field, role_field, roles_field, roles_mask, role_assignment, multi_role_assignment]"
       end
       
-      protected
+      protected 
+        def migration(options)   
+          migration_template "migration.rb", "db/migrate/devise_create_#{table_name}"      
+          run "rails g migration #{options}"
+        end
+      
+      
         include ::AuthAssist::MigrationHelper
         
     end

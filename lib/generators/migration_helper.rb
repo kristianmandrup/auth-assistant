@@ -25,30 +25,38 @@ module AuthAssist
       migration 'add_roles_field_to_user roles:string'
     end
 
-    def migration(options)   
-      migration_template "migration.rb", "db/migrate/devise_create_#{table_name}"      
-      run "rails g migration #{options}"
-    end
-
     def role_assignment_migration
-      run 'rails g model role name:string'
-
-      write_model_file('role', role_file_content)      
-      insert_model_file('user', user_file_content)
+      generate_role_model
+      insert_user_relation('has_many :roles')
     end            
 
     def multi_role_assignment_migration
-      run 'rails g model role name:string'
-      run 'rails g model role_assigment user_id:integer role_id:integer'          
-
-      write_model_file('role', role_file_content)
-      write_model_file('role_assignment', role_assignment_file_content)      
+      generate_role_model
+      generate_role_assignment_model
       
-      insert_model_file('user', user_file_content)
+      insert_user_relation('has_many :role_assignments')
+      insert_user_relation('has_many :roles, :through => :role_assignments')
     end            
 
 
     protected
+    
+      def model_exists?(name)
+        File.exists?(File.join(Rails.root, "app/models/#{name}.rb"))
+      end
+
+      def generate_role_model
+        return if model_exists?('role')
+        run 'rails g model role name:string'
+        write_model_file('role', role_file_content)      
+      end
+
+      def generate_role_assignment_model
+        return if model_exists?('role_assignment')
+        run 'rails g model role_assigment user_id:integer role_id:integer'          
+        write_model_file('role_assignment', role_assignment_file_content)      
+      end
+    
       def model_file(name)                          
         File.join(Rails.root, "app/models/#{name}.rb")        
       end
@@ -59,20 +67,14 @@ module AuthAssist
         end
       end
 
-      def insert_model_file(name, content)                    
-        gsub_file model_file(name), /class User < ActiveRecord::Base/ do |match|
-          match << content
+      def insert_user_relation(relation)
+        file = File.new(model_file('user'))
+        return if (file.read =~ /#{relation}/) 
+        gsub_file model_file('user'), /class User < ActiveRecord::Base/ do |match|
+          match << "\n  #{relation}"
         end
-      end
-      
-      def user_file_content
-         %q{
-         class User < ActiveRecord::Base  
-           has_many :role_assignments
-           has_many :roles, :through => :role_assignments           
-         }
-      end
-    
+      end      
+          
       def role_file_content
         %q{
           class Role < ActiveRecord::Base
@@ -80,10 +82,11 @@ module AuthAssist
             has_many :users, :through => :role_assignments
           end          
         }    
-      end
+      end       
+      
       def role_assignment_file_content
         %q{
-          class Assignment < ActiveRecord::Base
+          class RoleAssignment < ActiveRecord::Base
             belongs_to :user
             belongs_to :role
           end          
@@ -92,4 +95,3 @@ module AuthAssist
     
   end
 end
-      
