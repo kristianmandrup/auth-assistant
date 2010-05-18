@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{auth-assistant}
-  s.version = "0.3.1"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2010-05-16}
+  s.date = %q{2010-05-18}
   s.description = %q{Provides assistance for setting up an auth solution using devise and cancan auth frameworks}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
     ".DS_Store",
     ".document",
     ".gitignore",
+    "Changelog.txt",
     "LICENSE",
     "README.markdown",
     "Rakefile",
@@ -31,6 +32,7 @@ Gem::Specification.new do |s|
     "app/views/auth_assist/menu/_registration_items.html.erb",
     "auth-assistant.gemspec",
     "config/locales/en.yml",
+    "init.rb",
     "lib/.DS_Store",
     "lib/auth-assistant.rb",
     "lib/auth_assistant/configure.rb",
@@ -42,11 +44,12 @@ Gem::Specification.new do |s|
     "lib/auth_assistant/model/user_config.rb",
     "lib/auth_assistant/role_strategies/admin_field.rb",
     "lib/auth_assistant/role_strategies/all.rb",
+    "lib/auth_assistant/role_strategies/multi_role_assignment.rb",
     "lib/auth_assistant/role_strategies/role_assignment.rb",
     "lib/auth_assistant/role_strategies/role_field.rb",
     "lib/auth_assistant/role_strategies/roles_field.rb",
     "lib/auth_assistant/role_strategies/roles_mask.rb",
-    "lib/auth_assistant/role_strategies/strategy_helper.rb",
+    "lib/auth_assistant/role_strategies/shared.rb",
     "lib/auth_assistant/translate/authlabels.rb",
     "lib/auth_assistant/view/all.rb",
     "lib/auth_assistant/view/auth_menu_item.rb",
@@ -60,8 +63,18 @@ Gem::Specification.new do |s|
     "lib/generators/auth_assist/config/config_generator.rb",
     "lib/generators/auth_assist/templates/ability.rb",
     "lib/generators/auth_assist/templates/auth_assistant.rb",
+    "lib/generators/auth_assist/templates/permits.rb",
+    "lib/generators/auth_assist/templates/remove_multi_role_assignments_migration.rb",
+    "lib/generators/auth_assist/templates/remove_role_assignments_migration.rb",
+    "lib/generators/auth_assist/templates/role_assignments_migration.rb",
+    "lib/generators/auth_assist/templates/roles_migration.rb",
+    "lib/generators/auth_assist/test.rb",
     "lib/generators/auth_assist/views/views_generator.rb",
+    "lib/generators/auth_code_refactor.rb",
     "lib/generators/migration_helper.rb",
+    "lib/generators/reverse_migrations.rb",
+    "lib/generators/role_migrations.rb",
+    "lib/permits.rb",
     "spec/auth-assistant_spec.rb",
     "spec/generators/ability_gen_spec.rb",
     "spec/sandbox.rb",
