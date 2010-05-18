@@ -16,22 +16,49 @@ module AuthAssist
         @generator = generator
       end
                         
-      def generate_reverse_migration(strategy_name)
-        reverse_migration(migration_names.first)        
+      def generate_reverse_migration 
+        return reverse_migration if respond_to? :reverse_migration
+        generation.reverse_migration(migration_names.first)        
       end   
       
       def setup
         run_migration if respond_to? :run_migration
         configure if respond_to? :configure
       end   
+
+      protected
+        def migration(options)
+          generator.migration options
+        end       
       
-      def migration(options)
-        generator.migration options
-      end       
+        def insert_user_relation(relation)
+          generator.insert_user_relation relation        
+        end    
+
+        def remove_user_relation(relation)
+          generator.remove_user_relation(relation)
+        end
       
-      def insert_user_relation(has_roles)
-        generator.insert_user_relation has_roles        
-      end
+        def generate_role_model
+          generator.generate_role_model        
+        end
+
+        def remove_role_model
+          generator.remove_role_model
+        end
+
+        def remove_role_assignment_model
+          generator.remove_role_model
+        end
+      
+        def generate_role_assignment_model
+          generator.generate_role_assignment_model
+        end
+        
+        def migration_template(source, target)
+          generator.migration_template source, target
+        end  
+                
     end
 
     class AdminField < Base
@@ -75,7 +102,7 @@ module AuthAssist
 
       def run_migration
         migration "#{role_field_migration_name} role:string"
-      end      
+      end            
     end
 
 
@@ -92,6 +119,11 @@ module AuthAssist
       def configure
         generate_role_model
         insert_user_relation(has_roles)
+      end        
+
+      def reverse_configure
+        remove_role_model
+        remove_user_relation(has_roles)
       end        
       
       def reverse_migration      
@@ -118,6 +150,14 @@ module AuthAssist
         generate_role_assignment_model      
       end
       
+      def reverse_configure
+        remove_role_model
+        remove_role_assignment_model
+
+        remove_user_relation(has_role_assignments)
+        remove_user_relation(has_roles_through_assignments)
+      end        
+           
       def reverse_migration      
         migration_template 'remove_multi_role_assignments_migration.rb', 'remove_multi_role_assignments'
       end                

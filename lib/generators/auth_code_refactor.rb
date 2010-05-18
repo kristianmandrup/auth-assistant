@@ -30,7 +30,11 @@ module AuthAssist
           match << "\n  #{relation}"
         end
       end      
-
+        
+      def remove_user_relation(relation)
+        erase_in_user(relation)  
+      end
+    
       
       # refactor code
       def has_role_assignments 

@@ -23,7 +23,7 @@ module AuthAssist
       find_migration(name)      
     end
 
-    def copy_migration(name, new_name &block) 
+    def copy_migration(name, new_name, &block) 
       # create empty new migration
       migration new_name
       new_migration = find_migration(name)          
