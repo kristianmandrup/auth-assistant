@@ -16,7 +16,9 @@ module AuthAssistant
 
       module ClassMethods
         def set_scope
-          scope :with_role, lambda { |role| {:conditions => "role?(#{role})"} }
+          scope :with_role, lambda { |role|  
+            where("role?(#{role})")
+          }
         end
       end
       

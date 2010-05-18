@@ -1,4 +1,5 @@
 require 'generators/migration_helper'
+require 'generators/role_migrations'
 require 'auth_assistant/model/user_config'
 
 module AuthAssist
@@ -50,7 +51,8 @@ module AuthAssist
       end
       
       def run_migration
-        return nil if !options[:migration]        
+        clear_user_relations        
+        return nil if !options[:migration]                                        
         send :"#{name}_migration"          
       end 
 
@@ -58,14 +60,9 @@ module AuthAssist
         "#{$0} auth_assist:config strategy [admin_field, role_field, roles_field, roles_mask, role_assignment, multi_role_assignment]"
       end
       
-      protected 
-        def migration(options)   
-          migration_template "migration.rb", "db/migrate/devise_create_#{table_name}"      
-          run "rails g migration #{options}"
-        end
-      
-      
+      protected            
         include ::AuthAssist::MigrationHelper
+        include ::AuthAssist::RoleMigrations
         
     end
   end

@@ -1,4 +1,5 @@
 require 'generators/migration_helper'
+require 'generators/role_migrations'
 require 'rake'
 
 module AuthAssist
@@ -18,8 +19,6 @@ module AuthAssist
         case @strategy
         when :admin_field
           clear_migration_admin_field          
-        when :role_field
-          clear_migration_role_field        
         end
       end      
       

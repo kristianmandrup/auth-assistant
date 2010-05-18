@@ -16,7 +16,9 @@ module AuthAssistant
 
       module ClassMethods
         def set_scope
-          scope :with_role, lambda { |role| {:conditions => "roles_mask & #{calc_index(role.to_s)} > 0"} }
+          scope :with_role, lambda { |role| 
+            where("roles_mask & #{calc_index(role.to_s)} > 0") 
+          }
         end
       end
       
