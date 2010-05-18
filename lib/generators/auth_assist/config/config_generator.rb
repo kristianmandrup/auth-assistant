@@ -53,8 +53,8 @@ module AuthAssist
       def run_migration
         clear_user_relations        
         return nil if !options[:migration]                 
-        clazz = AuthAssistance::RoleMigrations.clazz(name)
-        mig_obj = clazz.new
+        clazz = AuthAssist::RoleMigrations.clazz(name)
+        mig_obj = clazz.new(self)
         mig_obj.run_migration
         mig_obj.configure
       end 
@@ -63,16 +63,7 @@ module AuthAssist
         "#{$0} auth_assist:config strategy [admin_field, role_field, roles_field, roles_mask, role_assignment, multi_role_assignment]"
       end
       
-      protected            
-        def migration_method(name)
-          :"#{name}_migration"      
-        end
-
-        def configure_method(name)
-          :"#{name}_configure"      
-        end
-
-      
+      protected                  
         include ::AuthAssist::MigrationHelper
         include ::AuthAssist::RoleMigrations
         

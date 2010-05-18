@@ -1,12 +1,20 @@
-module AuthAssistance
+require 'generators/migration_helper'
+
+module AuthAssist
   module RoleMigrations
 
     def self.clazz(name)
-      "AuthAssistance::RoleMigrations::#{name.camelize}".constantize      
+      "AuthAssist::RoleMigrations::#{name.camelize}".constantize      
     end
 
     class Base 
       include ::AuthAssist::MigrationHelper
+
+      attr_accessor :generator
+
+      def initialize(generator)
+        @generator = generator
+      end
                         
       def generate_reverse_migration(strategy_name)
         reverse_migration(migration_names.first)        
@@ -16,6 +24,14 @@ module AuthAssistance
         run_migration if respond_to? :run_migration
         configure if respond_to? :configure
       end   
+      
+      def migration(options)
+        generator.migration options
+      end       
+      
+      def insert_user_relation(has_roles)
+        generator.insert_user_relation has_roles        
+      end
     end
 
     class AdminField < Base
@@ -63,7 +79,7 @@ module AuthAssistance
     end
 
 
-    class RoleAssignment
+    class RoleAssignment < Base
       def migration_names
         ['add_role_id_to_user', 'create_roles']
       end
@@ -83,7 +99,7 @@ module AuthAssistance
       end                
     end
 
-    class MultiRoleAssignment
+    class MultiRoleAssignment < Base
       def migration_names
         ['add_role_assignment_id_to_user', 'create_role_assignments', 'create_roles']
       end

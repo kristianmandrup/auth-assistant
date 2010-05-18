@@ -1,4 +1,4 @@
-module AuthAssistance
+module AuthAssist
   module MigrationHelper
     module CodeRefactor 
 
@@ -62,5 +62,6 @@ module AuthAssistance
   end          
         }
       end
-    end
+    end 
+  end
 end

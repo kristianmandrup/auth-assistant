@@ -14,7 +14,7 @@ module AuthAssist
             
       def generate_clear_migration 
         return nil if !options[:migration]        
-        clazz = AuthAssistance::RoleMigrations.clazz(name)
+        clazz = AuthAssist::RoleMigrations.clazz(name)
         clazz.new.generate_reverse_migration(name)
       end
     end

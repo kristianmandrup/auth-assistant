@@ -29,7 +29,8 @@ module AuthAssist
       end
     end         
 
-    def self.included(base) #:nodoc:
+    def self.included(base) #:nodoc: 
+      puts "MigrationHelper included by #{base}"
       base.extend ClassMethods      
     end
        
