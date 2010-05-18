@@ -26,6 +26,12 @@ end
 Authorization is setup by designing permits for each can of role to do certain actions.
 The config generator generates a default permits.rb file in /lib
 
+Please see "cancan 1.1 wiki":http://wiki.github.com/ryanb/cancan/upgrading-to-11 for more options 
+you can use in designing your Permits. The 'owns' convenience method provided, now uses the new hash option so it
+is also available in the controller using fx:
+
+`Book.accessible_by(current_ability)` 
+
 Example:
 <pre>
 module RolePermit
@@ -38,8 +44,11 @@ module RolePermit
       super
       return if !user.role?(:moderator)
       can :read, :all    
-      # can manage comment instance if 'user' or 'owner' field on instance points to this user, marking ownership
+      # can manage comment instance if 'user' field on instance points to this user, marking ownership
       user.owns(Comment) 
+
+      # override default 'user_id' field to use 'owner' as foreign key to user.id  
+      user.owns(Book, :author)       
     end  
   end
 end
@@ -258,7 +267,11 @@ $ rails g auth_assist:config role_field --migration
 The `clear` generator removes any existing strategy file and optionally generates a migration to remove any tables and fields related to the existing role strategy.
 This allows you to easily change role strategy by first running the `clear` generator and then the `config` generator with a new strategy.
 
-`$ rails g auth_assist:clear`                              
+`$ rails g auth_assist:clear NAME`                              
+
+Example usage:
+
+`$ rails g auth_assist:clear role_field`                              
 
 ### Views Generator ###
 
