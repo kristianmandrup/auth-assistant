@@ -52,8 +52,11 @@ module AuthAssist
       
       def run_migration
         clear_user_relations        
-        return nil if !options[:migration]                                        
-        send :"#{name}_migration"          
+        return nil if !options[:migration]                 
+        clazz = AuthAssistance::RoleMigrations.clazz(name)
+        mig_obj = clazz.new
+        mig_obj.run_migration
+        mig_obj.configure
       end 
 
       def self.banner
@@ -61,6 +64,15 @@ module AuthAssist
       end
       
       protected            
+        def migration_method(name)
+          :"#{name}_migration"      
+        end
+
+        def configure_method(name)
+          :"#{name}_configure"      
+        end
+
+      
         include ::AuthAssist::MigrationHelper
         include ::AuthAssist::RoleMigrations
         

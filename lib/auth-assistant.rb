@@ -6,6 +6,14 @@ module ApplicationHelper
   end
 end
 
+class ApplicationController
+  private
+    def current_ability
+      @current_ability ||= Ability.new(current_user, request)
+    end
+end
+
+
 module AuthAssistant
   module ViewHelpers
     include AuthAssistant::ViewHelpers::SessionLink

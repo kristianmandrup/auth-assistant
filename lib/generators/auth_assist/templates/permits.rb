@@ -7,7 +7,7 @@ module RolePermit
       @ability = ability
     end
 
-    def permit?(user) 
+    def permit?(user, request) 
       user.has ability      
     end
 
@@ -19,10 +19,8 @@ module RolePermit
       ability.can_definitions << CanDefinition.new(false, action, subject, conditions, block)
     end
     
-    def owns(user, clazz)
-      can :manage, clazz do |comment|
-        comment.try(:user) == user || comment.try(:owner) == user
-      end                
+    def owns(user, clazz, field = :user_id)
+      can :manage, clazz, field => user.id
     end 
     
   end
@@ -32,7 +30,7 @@ module RolePermit
       super
     end
 
-    def permit?(user)    
+    def permit?(user, request)    
       super
       return if !user.role? :admin    
       can :manage, :all    
@@ -44,7 +42,7 @@ module RolePermit
       super
     end
 
-    def permit?(user) 
+    def permit?(user, request) 
       super
       return if user.role? :admin
       can :read, :all           
@@ -65,7 +63,7 @@ module RolePermit
       super
     end
     
-    def permit?(user)
+    def permit?(user, request)
       super
       return if !user.role?(:moderator)
       can :read, :all      

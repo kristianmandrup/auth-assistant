@@ -13,10 +13,10 @@ class Ability
     @role_permits
   end
 
-  def initialize(user)
+  def initialize(user, request)
     # put ability logic here!
     user ||= User.new # guest    
-    Ability.role_permits.each{|rp| rp.permit?(user) }
+    Ability.role_permits.each{|rp| rp.permit?(user, request) }
   end    
 end
       
