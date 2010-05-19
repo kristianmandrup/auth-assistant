@@ -1,0 +1,10 @@
+The *clear* generator removes an existing role strategy and optionally generates a migration to revert the database to a state without this role strategy.
+
+This generator allows you to easily change role strategy: 
+1. run the *clear* generator to clear an existing role strategy
+2. run the *config* generator to configure the app with a new role strategy.
+
+<pre>$ rails g auth_assist:clear NAME</pre>
+
+Example usage:
+<pre>$ rails g auth_assist:clear role_field</pre>
