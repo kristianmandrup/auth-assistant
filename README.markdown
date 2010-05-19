@@ -1,6 +1,6 @@
 # auth-assistant #
 
-Provides assistance in setting up a complete authorization solution for your Rails 3 app, using "cancan":http://github.com/ryanb/cancan and "devise":http://github.com/plataformatec/devise.
+Provides assistance in setting up a complete authorization solution for your Rails 3 app, using [cancan](http://github.com/ryanb/cancan) and [devise](http://github.com/plataformatec/devise)
 
 Note: You are most welcome to provide "plugins" for other similar frameworks or perhaps add role group support.
 
@@ -8,18 +8,18 @@ Note: You are most welcome to provide "plugins" for other similar frameworks or 
 
 This gem has been designed for Rails 3 only.
 
-See INSTALLATION.txt or "Installation":http://wiki.github.com/kristianmandrup/auth-assistant/installation
+See _INSTALLATION.txt_ or [Installation](http://wiki.github.com/kristianmandrup/auth-assistant/installation)
 
 ## Role strategies ##
 
-For details on the available role strategies see ROLE_STRATEGIES.txt or "Role strategies":http://wiki.github.com/kristianmandrup/auth-assistant/role-strategies 
+For details on the available role strategies see ROLE_STRATEGIES.txt or [Role strategies](http://wiki.github.com/kristianmandrup/auth-assistant/role-strategies) 
 
 ## Permits ##
 
 Authorization is setup by creating 'permitsø for each kind of role, in order to permit that role to do certain actions.
 The config generator generates a default permits.rb file in /lib
 
-See PERMITS.txt or "Permits":http://wiki.github.com/kristianmandrup/auth-assistant/permits
+See _PERMITS.txt_ or [Permits](http://wiki.github.com/kristianmandrup/auth-assistant/permits)
 
 ## Generators ##
 
@@ -33,19 +33,19 @@ The following generators are available
 
 The *config* generator is used to configure your Rails app with a role strategy for use with CanCan and Devise.
 
-See "Config Generator":http://wiki.github.com/kristianmandrup/auth-assistant/config-generator
+See [Config Generator](http://wiki.github.com/kristianmandrup/auth-assistant/config-generator)
 
 ### Clear Generator ###
 
 The *clear* generator is used to clear a role strategy from your Rails app so you can create a new one from a fresh starting point!
 
-See "Clear Generator":http://wiki.github.com/kristianmandrup/auth-assistant/clear-generator
+See [Clear Generator](http://wiki.github.com/kristianmandrup/auth-assistant/clear-generator)
 
 ### Views Generator ###
 
 The *view* generator is used to generate views to faciliate creation of session and registration menu items.
 
-See "View Generator":http://wiki.github.com/kristianmandrup/auth-assistant/view-generator
+See [View Generator](http://wiki.github.com/kristianmandrup/auth-assistant/view-generator)
 
 == Note on Patches/Pull Requests
  
