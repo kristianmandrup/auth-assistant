@@ -47,7 +47,7 @@ The *view* generator is used to generate views to faciliate creation of session 
 
 See [View Generator](http://wiki.github.com/kristianmandrup/auth-assistant/view-generator)
 
-== Note on Patches/Pull Requests
+## Note on Patches/Pull Requests ##
  
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -57,6 +57,6 @@ See [View Generator](http://wiki.github.com/kristianmandrup/auth-assistant/view-
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-== Copyright
+## Copyright ##
 
 Copyright (c) 2010 Kristian Mandrup. See LICENSE for details.
