@@ -26,6 +26,22 @@ module AuthAssist
         configure if respond_to? :configure
       end   
 
+      def migration_name
+        migration_names[0]
+      end
+
+      def run_migration
+        migration "#{migration_name} #{migration_field}"
+      end
+
+      def configure 
+        # can be overridden if necessary by subclass method
+      end
+
+      def reverse_configure
+        # can be overridden if necessary by subclass method
+      end
+
       protected
         def migration(options)
           generator.migration options
@@ -57,17 +73,16 @@ module AuthAssist
         
         def migration_template(source, target)
           generator.migration_template source, target
-        end  
-                
+        end                  
     end
 
     class AdminField < Base
       def migration_names
         ['add_admin_field_to_user']
       end
-
-      def run_migration
-        migration "#{admin_field_migration_name} admin:boolean"
+      
+      def migration_field
+        "admin:boolean"
       end
     end
 
@@ -77,21 +92,20 @@ module AuthAssist
         ['add_roles_mask_to_user']      
       end        
 
-      def run_migration
-        migration "#{roles_mask_migration_name} roles_mask:integer"
-      end              
+      def migration_field
+        "roles_mask:integer"
+      end
     end
 
        
     class RolesField < Base
       def migration_names
         ['add_roles_field_to_user']      
-      end
+      end      
 
-      def run_migration
-        migration "#{roles_field_migration_name} roles:string"
-      end
-            
+      def migration_field
+        "roles:string"
+      end            
     end
 
        
@@ -100,9 +114,9 @@ module AuthAssist
         ['add_role_field_to_user']      
       end
 
-      def run_migration
-        migration "#{role_field_migration_name} role:string"
-      end            
+      def migration_field
+        "role:string"
+      end
     end
 
 

@@ -55,8 +55,8 @@ module AuthAssist
         return nil if !options[:migration]                 
         clazz = AuthAssist::RoleMigrations.clazz(name)
         mig_obj = clazz.new(self)
-        mig_obj.run_migration
-        mig_obj.configure
+        mig_obj.run_migration if mig_obj.respond_to? :run_migration
+        mig_obj.configure if mig_obj.respond_to? :configure
       end 
 
       def self.banner
