@@ -48,17 +48,10 @@ module AuthAssist
         File.exists?(File.join(Rails.root, "app/models/#{name}.rb"))
       end
 
-      def remove_model(name)
+      def remove_model(model_name)
+        model_name = model_name.to_s.camelize
         file = File.join(Rails.root, "app/models/#{name}.rb")        
         FileUtils.rm file if file
-      end
-
-      def remove_role_model 
-        remove_model('role')        
-      end
-
-      def remove_role_assignment_model 
-        remove_model('role_assignment')        
       end
 
       def generate_role_model

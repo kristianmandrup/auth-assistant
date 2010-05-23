@@ -51,7 +51,7 @@ module AuthAssist
       end
       
       def run_migration
-        clear_user_relations        
+        clear_relations :user        
         return nil if !options[:migration]                 
         clazz = AuthAssist::RoleMigrations.clazz(name)
         mig_obj = clazz.new(self)

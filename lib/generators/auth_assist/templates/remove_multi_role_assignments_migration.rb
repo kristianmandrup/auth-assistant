@@ -11,14 +11,14 @@ class CreateMultiRoleAssignments < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_column :users, :role_assignment_id, :integer
+    # add_column :users, :role_assignment_id, :integer
         
   end
 
   def self.up
     drop_table :role_assignments
     drop_table :roles
-    remove_column :users, :role_assignment_id
+    # remove_column :users, :role_assignment_id
   end
   
 end

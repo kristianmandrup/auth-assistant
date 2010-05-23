@@ -3,38 +3,49 @@ module AuthAssist
     module CodeRefactor 
 
       # erase      
-      def clear_user_relations
-        erase_in_user(has_roles_through_assignments)
-        erase_in_user(has_roles)  
-        erase_in_user(has_role_assignments)
+      def clear_relations(model_name)       
+        model_name = model_name.to_s
+        erase_in(model_name, has_roles_through_assignments)
+        erase_in(model_name, has_roles)  
+        erase_in(model_name, has_role_assignments)
       end
 
-      def erase_in_user(txt)  
-        file = File.new(model_file('user'))
+      def erase_in(model_name, txt)      
+        model_name = model_name.to_s   
+        file = File.new(model_file(model_name))
         return if !(file.read =~ /#{txt}/)         
-        gsub_file model_file('user'), /#{Regexp.escape(txt + "\n")}/, ''
+        gsub_file model_file(model_name), /#{Regexp.escape(txt + "\n")}/, ''
       end
 
 
       # insert
-      def write_model_file(name, content)
-        File.open(model_file(name), 'w+') do |f| 
+      def write_model_file(model_name, content)    
+        model_name = model_name.to_s
+        File.open(model_file(model_name), 'w+') do |f| 
           f.write(content) 
         end
       end
 
-      def insert_user_relation(relation)
-        file = File.new(model_file('user'))
+      def insert_relation(model_name, relation)
+        model_name = model_name.to_s
+        file = File.new(model_file(model_name))
         return if (file.read =~ /#{relation}/) 
-        gsub_file model_file('user'), /class User < ActiveRecord::Base/ do |match|
+        gsub_file model_file(model_name), /class #{model.camelize} < ActiveRecord::Base/ do |match|
           match << "\n  #{relation}"
         end
       end      
         
-      def remove_user_relation(relation)
-        erase_in_user(relation)  
+      def remove_relation(model_name, relation)
+        erase_in(model_name.to_s, relation)  
       end
-    
+      
+      def belongs_to_user
+        'belongs_to :user'
+      end
+
+      def belongs_to_role
+        'belongs_to :role'
+      end
       
       # refactor code
       def has_role_assignments 
@@ -50,19 +61,19 @@ module AuthAssist
       end
         
       def role_file_content
-        %q{
+        %Q{
   class Role < ActiveRecord::Base
-  has_many :role_assignments
-  has_many :users, :through => :role_assignments
+  #{has_role_assignments}
+  #{has_roles_through_assignments}
   end          
         }    
       end       
     
       def role_assignment_file_content
-        %q{
+        %Q{
   class RoleAssignment < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :role
+#{belongs_to_user}
+#{belongs_to_role}
   end          
         }
       end

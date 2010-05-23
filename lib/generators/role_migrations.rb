@@ -47,24 +47,20 @@ module AuthAssist
           generator.migration options
         end       
       
-        def insert_user_relation(relation)
-          generator.insert_user_relation relation        
+        def insert_relation(model_name, relation)
+          generator.insert_relation model_name, relation        
         end    
 
-        def remove_user_relation(relation)
-          generator.remove_user_relation(relation)
+        def remove_relation(model_name, relation)
+          generator.remove_relation(model_name, relation)
+        end
+
+        def remove_model model_name
+          generator.remove_model model_name
         end
       
         def generate_role_model
           generator.generate_role_model        
-        end
-
-        def remove_role_model
-          generator.remove_role_model
-        end
-
-        def remove_role_assignment_model
-          generator.remove_role_model
         end
       
         def generate_role_assignment_model
@@ -132,12 +128,13 @@ module AuthAssist
 
       def configure
         generate_role_model
-        insert_user_relation(has_roles)
+        insert_relation(:user, has_roles)
+        insert_relation(:role, belongs_to_user)        
       end        
 
       def reverse_configure
-        remove_role_model
-        remove_user_relation(has_roles)
+        remove_model(:role)
+        remove_relation(:user, has_roles)
       end        
       
       def reverse_migration      
@@ -151,25 +148,25 @@ module AuthAssist
       end
 
       def run_migration        
-        migration 'add_role_assignment_id_to_user role_assignment_id:integer'
+        # migration 'add_role_assignment_id_to_user role_assignment_id:integer'
         migration 'create_role_assignments role_id:integer user_id:integer'      
         migration 'create_roles name:string'
       end
 
       def configure      
-        insert_user_relation(has_role_assignments)
-        insert_user_relation(has_roles_through_assignments)
+        insert_relation(:user, has_role_assignments)
+        insert_relation(:user, has_roles_through_assignments)
 
         generate_role_model
         generate_role_assignment_model      
       end
       
       def reverse_configure
-        remove_role_model
+        remove_model :role
         remove_role_assignment_model
 
-        remove_user_relation(has_role_assignments)
-        remove_user_relation(has_roles_through_assignments)
+        remove_relation(:user, has_role_assignments)
+        remove_relation(:user, has_roles_through_assignments)
       end        
            
       def reverse_migration      
