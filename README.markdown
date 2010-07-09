@@ -1,8 +1,18 @@
-# auth-assistant #
+# User and Permission System Assistant (Auth-Assistant) #
 
-Provides assistance in setting up a complete authorization solution for your Rails 3 app, using [cancan](http://github.com/ryanb/cancan) and [devise](http://github.com/plataformatec/devise)
+Provides assistance in setting up a complete user login and role permission system solution for your Rails 3 app. 
+I am currently targeting:
 
-Note: You are most welcome to provide "plugins" for other similar frameworks or perhaps add role group support.
+## User login systems
+ * [devise](http://github.com/plataformatec/devise) 
+
+* Permission systems 
+* [cancan](http://github.com/ryanb/cancan)
+* [canable](http://github.com/jnunemaker/canable) - in the near future
+
+_Note:_
+You are most welcome to provide "plugins" for other similar frameworks or perhaps add role/group support or suggest any system that support grouping of roles.
+I think Document DBs such as Mongo and Riak are perfect to for modelling a role group hierarchical relationship, whereas it becomes a nightmare in a relational system. 
 
 ## Installation and configuration ##
 
@@ -12,22 +22,30 @@ See _INSTALLATION.txt_ or [Installation](http://wiki.github.com/kristianmandrup/
 
 ## Role strategies ##
 
-For details on the available role strategies see ROLE_STRATEGIES.txt or [Role strategies](http://wiki.github.com/kristianmandrup/auth-assistant/role-strategies) 
+For details on the available role strategies see _ROLE_STRATEGIES.txt__ or [Role strategies](http://wiki.github.com/kristianmandrup/auth-assistant/role-strategies) 
 
-## Permits ##
+## Permits CanCan ##
 
-Authorization is setup by creating 'permitsø for each kind of role, in order to permit that role to do certain actions.
-The config generator generates a default permits.rb file in /lib
+Role based authorization is setup by creating 'permits' for each kind of role, in order to permit that role to do certain actions.
+The *config* generator generates a default <code>permits.rb</code> file in /lib
 
 See _PERMITS.txt_ or [Permits](http://wiki.github.com/kristianmandrup/auth-assistant/permits)
 
+## Permits Canable ##
+
+In Canable the permissions are by default defined in the models. I can tweak this behavior to enable the same central permission setup as I use for CanCan (which is also a tweak of the default usage setup). My current branch of Canable contains generators to setup the models and user with a Canable config. 
+More to follow when I get further here...
+
 ## Generators ##
 
-The following generators are available 
+The following generators are currently available 
 
 * config - configure with new strategy
 * clear - clear existing strategy
 * views - generate partials for use in views
+
+So far they only work for Active Record as the ORM. I pkan to support other ORMs in the future such as Mongo Mapper, Mongoid and Data Mapper.
+Any help in this regard would be very much appreciated! fork ahead!
 
 ### Config Generator ###
 
