@@ -6,30 +6,10 @@ require 'rails/generators/test_case'
 
 require 'matchers/all'
 
-class TestApp < Rails::Application
-  config.root = File.dirname(__FILE__)
-end
-Rails.application = TestApp
-
-module Rails
-  def self.root
-    @root ||= File.expand_path(File.join(File.dirname(__FILE__), '..', 'tmp', 'rails'))
-  end
-end
-Rails.application.config.root = Rails.root
+require 'rails_spec_helper'
 
 # Call configure to load the settings from
 # Rails.application.config.generators to Rails::Generators
-Rails::Generators.configure!
-
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
-
-def copy_routes
-  routes = File.expand_path(File.join(File.dirname(__FILE__), 'fixtures', 'routes.rb'))
-  destination = File.join(Rails.root, "config")
-  FileUtils.mkdir_p(destination)
-  FileUtils.cp File.expand_path(routes), destination
-end
 
 def generator_list
   {
@@ -37,33 +17,52 @@ def generator_list
   }
 end
 
-def path_prefix
-  'generators'
-end
+Rails::Generators.configure!
 
 # require the generators
-generator_list.each do |name, generators|
+generator_list.each do |namespace, generators|
   generators.each do |generator_name|
-    require File.join(path_prefix(name), name, generator_name, "#{generator_name}_generator")
+    require File.join('generators', namespace, generator_name, "#{generator_name}_generator")
   end    
 end
 
 module GeneratorSpec
   class << self  
     attr_accessor :generator
+
+    def setup                  
+      with_generator do |g|
+        g.destination File.join(Rails.root)
+        g.setup :prepare_destination
+        g.setup :copy_routes
+      end
+    end
     
     def get_generator
       @generator = Rails::Generators::Testcase.new
     end
 
-    def run_generator
-      generator.run_generator
+    def run_generator *args, &block
+      generator.run_generator *args
+      if block
+        block.arity < 1 ? generator.instance_eval(&block) : block.call(generator, self)  
+      end      
+    end
+
+    def check(&block)
+      if block
+        block.arity < 1 ? self.instance_eval(&block) : block.call(self)  
+      end      
     end
     
     def with(generator, &block)
       if block
-        block.arity < 1 ? generator.instance_eval(&block) : block.call(generator)  
+        block.arity < 1 ? generator.instance_eval(&block) : block.call(generator, self)  
       end
+    end
+
+    def with_generator &block
+      with(get_generator, &block)
     end
 
     def check_methods methods
@@ -72,6 +71,18 @@ module GeneratorSpec
       end
     end
     alias :check_methods :methods
+
+    def check_matchings matchings
+      matchings.each do |matching|
+        content.should_match /#{Regexp.escape(matching)}/
+      end
+    end
+    alias :check_matchings :matchings
+
+    def check_file file
+      generator.should generate_file file
+    end
+    alias :check_file :file
 
     def check_class_methods methods
       methods.each do |method_name|
@@ -89,12 +100,10 @@ module GeneratorSpec
     end
     alias :check_view :view
 
-    def check_model(name, options = {})
-      generator.should generate_file("app/models/#{user.underscore}.rb") do |file_content|
+    def check_model(name, clazz, options = {})
+      generator.should generate_file("app/models/#{name.underscore}.rb") do |file_content|
         file_content.should have_class user.camelize do |content|
-          content.should_match /include Canable::Ables/
-          content.should_match /userstamps!/
-    
+          check_matchings options[:matchings]    
           check_methods(options[:methods])
           check_class_methods(options[:class_methods])
         end

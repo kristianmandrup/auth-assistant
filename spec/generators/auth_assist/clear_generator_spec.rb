@@ -1,18 +1,18 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe 'Generator' do
-  let(:generator) { GeneratorSpec.generator }
-
-  GeneratorSpec.with generator do
+  GeneratorSpec.with_generator do
     destination File.join(Rails.root)
     tests AuthAssist::Generators::ClearGenerator
     setup :prepare_destination
     setup :copy_routes
   end
 
-  it "should work"  
+  it "should clear ..."  
     name = 'user'
-    generator.run_generator
-    GeneratorSpec.check_model(name)      
+    GeneratorSpec.with_generator do |g, check|
+      g.run_generator
+      # TODO
+    end
   end
 end

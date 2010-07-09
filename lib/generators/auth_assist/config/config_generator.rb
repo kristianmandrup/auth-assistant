@@ -32,8 +32,10 @@ module AuthAssist
         template "auth_assistant.rb", "config/initializers/x_auth_assistant.rb"
       end 
 
-      def create_ability_model
+      def create_default_ability_setup
         copy_file 'ability.rb', 'app/models/ability.rb'
+        
+      def create_default_permits        
         copy_file 'permits.rb', 'lib/permits.rb'
       end
 
