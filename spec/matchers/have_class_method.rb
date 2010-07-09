@@ -20,7 +20,8 @@ module RSpec::Rails
       # actual is the generator
       def matches?(method)      
         @method = method
-        @content =~ /def\s+self.#{method}\s*(\(.+\))?(.*?)\n/m
+        @content =~ /def\s+self.#{method}\s*(\(.+\))?(.*?)\n/m 
+        yield $2.strip if block_given?        
       end          
     
       def failure_message

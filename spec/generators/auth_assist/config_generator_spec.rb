@@ -5,7 +5,7 @@ describe 'Generator' do
 
   GeneratorSpec.with generator do
     destination File.join(Rails.root)
-    tests AuthAssist::Generators::ClearGenerator
+    tests AuthAssist::Generators::ConfigGenerator
     setup :prepare_destination
     setup :copy_routes
   end
@@ -13,6 +13,8 @@ describe 'Generator' do
   it "should work"  
     name = 'user'
     generator.run_generator
-    GeneratorSpec.check_model(name)      
+    generator.should generate_file 'app/models/ability.rb'
+    generator.should generate_file 'lib/permits.rb'
+    generator.should generate_file 'config/locales/auth_assist.en.yml'
   end
 end

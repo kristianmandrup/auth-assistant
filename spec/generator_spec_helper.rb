@@ -4,6 +4,8 @@ require 'rails/all'
 require 'rails/generators'
 require 'rails/generators/test_case'
 
+require 'matchers/all'
+
 class TestApp < Rails::Application
   config.root = File.dirname(__FILE__)
 end
@@ -29,20 +31,6 @@ def copy_routes
   FileUtils.cp File.expand_path(routes), destination
 end
 
-# Asserts the given class exists in the given content. When a block is given,
-# it yields the content of the class.
-#
-#   assert_file "test/functional/accounts_controller_test.rb" do |controller_test|
-#     assert_class "AccountsControllerTest", controller_test do |klass|
-#       assert_match /context "index action"/, klass
-#     end
-#   end
-#
-def assert_class(klass, content)
-  assert content =~ /class #{klass}(\(.+\))?(.*?)\nend/m, "Expected to have class #{klass}"
-  yield $2.strip if block_given?
-end
-
 def generator_list
   {
     :canable      => ['model', 'user'],
@@ -60,9 +48,58 @@ generator_list.each do |name, generators|
   end    
 end
 
+module GeneratorSpec
+  class << self  
+    attr_accessor :generator
+    
+    def get_generator
+      @generator = Rails::Generators::Testcase.new
+    end
 
-def with(generator, &block)
-  if block
-    block.arity < 1 ? generator.instance_eval(&block) : block.call(generator)  
-  end
+    def run_generator
+      generator.run_generator
+    end
+    
+    def with(generator, &block)
+      if block
+        block.arity < 1 ? generator.instance_eval(&block) : block.call(generator)  
+      end
+    end
+
+    def check_methods methods
+      methods.each do |method_name|
+        content.should_match /def #{method_name}_by?(user)/
+      end
+    end
+    alias :check_methods :methods
+
+    def check_class_methods methods
+      methods.each do |method_name|
+        content.should_match /def self.#{method_name}_by?(user)/
+      end
+    end
+    alias :check_class_methods :class_methods
+
+    def check_view(folder, file_name, strings)
+      generator.should generate_file("app/views/#{folder}/#{filename}") do |file_content|
+        strings.each do |str|
+          content.should_match /#{Regexp.escape(str)}/
+        end
+      end
+    end
+    alias :check_view :view
+
+    def check_model(name, options = {})
+      generator.should generate_file("app/models/#{user.underscore}.rb") do |file_content|
+        file_content.should have_class user.camelize do |content|
+          content.should_match /include Canable::Ables/
+          content.should_match /userstamps!/
+    
+          check_methods(options[:methods])
+          check_class_methods(options[:class_methods])
+        end
+      end            
+    end
+    alias :check_model :model    
+  end # class self
 end

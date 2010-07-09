@@ -1,11 +1,11 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rspec'
 require 'rspec/autorun' 
 require 'rails'
-# require 'auth-assistant'
+require 'auth-assistant'
+require 'generator_spec_helper'
 
-Rspec.configure do |c|
-  # c.mock_with :rspec
+RSpec.configure do |config|
+  config.mock_with :mocha  
+  config.include(RSpec::Rails::GeneratorMatchers)
 end
 

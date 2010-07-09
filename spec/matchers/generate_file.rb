@@ -13,9 +13,13 @@ module RSpec::Rails
       end
 
       # actual is the generator
-      def matches?(generator)      
+      def matches?(generator, &block)      
         @expected = File.expand_path(@relative, generator.class.destination_root)
-        File.exists?(@expected)
+        File.exists?(@expected)                   
+        if block
+          read = File.read(absolute)
+          yield read
+        end
       end          
     
       def failure_message
