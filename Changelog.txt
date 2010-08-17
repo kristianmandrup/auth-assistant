@@ -1,7 +1,12 @@
+June 25, 2010
+----
+Split off roles implementation into a set of *roles_for* gems for various ORMs.
+Planning a role_groups gem for mongoid and mongo mapper to support grouping roles.
+
 June 5, 2010
 ----
-Have read up on RSpec and Testing Recipes. Will soon implement complete test suite using: 
-- RSpec, Cucumber, Null DB http://avdi.org/projects/nulldb/ and Not-a-mock http://github.com/notahat/not_a_mock
+Have read up on RSpec and Testing Recipes. Will soon implement complete test suite using RSpec 
+Possibly also using: Cucumber, Null DB http://avdi.org/projects/nulldb/ and Not-a-mock http://github.com/notahat/not_a_mock
 
 May 23, 2010
 ---

@@ -1,8 +1,6 @@
-require 'generators/migration_helper'
-require 'generators/role_migrations'
 require 'auth_assistant/model/user_config'
 
-module AuthAssist
+module AuthAssist 
   module Generators
     class ConfigGenerator < Rails::Generators::NamedBase
       desc "Generates user role migration and matching auth configuration initializer" 
@@ -52,23 +50,9 @@ module AuthAssist
         copy_file locale_file, "config/locales/auth_assist.en.yml"    
       end
       
-      def run_migration
-        clear_relations :user        
-        return nil if !options[:migration]                 
-        clazz = AuthAssist::RoleMigrations.clazz(name)
-        mig_obj = clazz.new(self)
-        mig_obj.run_migration if mig_obj.respond_to? :run_migration
-        mig_obj.configure if mig_obj.respond_to? :configure
-      end 
-
       def self.banner
         "#{$0} auth_assist:config strategy [admin_field, role_field, roles_field, roles_mask, role_assignment, multi_role_assignment]"
-      end
-      
-      protected                  
-        include ::AuthAssist::MigrationHelper
-        include ::AuthAssist::RoleMigrations
-        
+      end              
     end
   end
 end

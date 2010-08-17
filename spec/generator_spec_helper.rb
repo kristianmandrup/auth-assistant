@@ -11,19 +11,15 @@ require 'rails_spec_helper'
 # Call configure to load the settings from
 # Rails.application.config.generators to Rails::Generators
 
-def generator_list
-  {
-    :canable      => ['model', 'user'],
-  }
-end
-
 Rails::Generators.configure!
 
 # require the generators
-generator_list.each do |namespace, generators|
-  generators.each do |generator_name|
-    require File.join('generators', namespace, generator_name, "#{generator_name}_generator")
-  end    
+def require_generators generator_list
+  generator_list.each do |name, generators|
+    generators.each do |generator_name|
+      require File.join('generators', name.to_s, generator_name.to_s, "#{generator_name}_generator")
+    end    
+  end
 end
 
 module GeneratorSpec

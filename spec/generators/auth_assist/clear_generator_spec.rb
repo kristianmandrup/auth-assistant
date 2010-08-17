@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe 'Generator' do
   GeneratorSpec.with_generator do
@@ -8,7 +8,7 @@ describe 'Generator' do
     setup :copy_routes
   end
 
-  it "should clear ..."  
+  it "should clear ..." do  
     name = 'user'
     GeneratorSpec.with_generator do |g, check|
       g.run_generator

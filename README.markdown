@@ -1,18 +1,32 @@
-# User and Permission System Assistant (Auth-Assistant) #
+# Auth assistant
 
-Provides assistance in setting up a complete user login and role permission system solution for your Rails 3 app. 
-I am currently targeting:
+This project aims to assist you in setting up a complete user login and role permission system for your Rails 3 app.
+It targets Devise as the user/login system and cancan as the permission system and my own role systems, all integrated in a powerful, yet flexible solution.
+
+__NOTE__: Aug 2010
+This project will undergo a major refactoring effort, hopefully resulting in a powerful, stable version by the end of August or thereabouts!
+Stay tuned! Until then, this project should only be looked at as a reference for ideas, inspiration etc.
 
 ## User login systems
- * [devise](http://github.com/plataformatec/devise) 
 
-* Permission systems 
+Devise has been targeted as the User login (auth/auth) system of choice.
+
+* [devise](http://github.com/plataformatec/devise) 
+
+## Permission systems 
+
+There are two similar simple but powerful permission system I plan to support:
+
 * [cancan](http://github.com/ryanb/cancan)
-* [canable](http://github.com/jnunemaker/canable) - in the near future
+* [canable](http://github.com/jnunemaker/canable) - in the future
 
 _Note:_
 You are most welcome to provide "plugins" for other similar frameworks or perhaps add role/group support or suggest any system that support grouping of roles.
-I think Document DBs such as Mongo and Riak are perfect to for modelling a role group hierarchical relationship, whereas it becomes a nightmare in a relational system. 
+I think Document DBs such as Mongo and Riak are perfect for modeling a role group hierarchical relationship, whereas it quickly becomes something of a nightmare in a relational DB system. This is planned as part of the roles strategies integration (see below).
+
+## Roles
+
+I am close to having developed a comprehensive, very flexible Roles strategy system that is to be fully integrated with Auth-assistant in the near future.
 
 ## Installation and configuration ##
 
@@ -23,6 +37,11 @@ See _INSTALLATION.txt_ or [Installation](http://wiki.github.com/kristianmandrup/
 ## Role strategies ##
 
 For details on the available role strategies see _ROLE_STRATEGIES.txt__ or [Role strategies](http://wiki.github.com/kristianmandrup/auth-assistant/role-strategies) 
+
+_Update_ : Aug 2010
+
+I have recently developed a [roles_generic](http://github.com/kristianmandrup/roles_generic) gem, which allows for easy setup of your models for a generic Role strategy.
+I have also recently developed a bunch of *roles_for_xxxx* gems, f.ex [roles_for_ar](http://github.com/kristianmandrup/roles_for_ar) which make it simple to add a role strategy for various ORMs. I have plans to integrate these role strategies in the very near future (by end of August, 2010).
 
 ## Permits CanCan ##
 

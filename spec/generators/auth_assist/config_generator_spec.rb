@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe 'Generator' do
   GeneratorSpec.with_generator do |g, c|
@@ -33,7 +33,7 @@ describe 'Generator' do
       @check.file 'config/locales/auth_assist.en.yml'
     end
   
-    it "should create and configure user model"
+    it "should create and configure user model" do
       GeneratorSpec.with_generator do |g, check|
         g.run_generator    
         check.model 'user', 'User', :matchings => ['Active::Record', 'devise']

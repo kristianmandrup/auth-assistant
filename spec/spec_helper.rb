@@ -1,6 +1,5 @@
 require 'rspec'
 require 'rspec/autorun' 
-require 'rails'
 require 'auth-assistant'
 require 'generator_spec_helper'
 
