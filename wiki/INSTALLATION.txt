@@ -1,6 +1,6 @@
 This gem has been designed for Rails 3 only. Any back port to Rails 2 is most welcome ;)
 
-Insert <pre>gem 'auth-assistant'</pre> in your Rails 3 _Gemfile_
+Insert <pre>gem 'auth-assistant'</pre> in your Rails 3 Gemfile
 
 <pre>$ bundle install</pre>
 
@@ -8,7 +8,3 @@ Run the "config generator":http://wiki.github.com/kristianmandrup/auth-assistant
 
 Finally make the group of *auth_assistant* "view helpers":http://wiki.github.com/kristianmandrup/auth-assistant/view-helpers accessible in your views, by adding them to the *ApplicationHelper* module like this:
 
-<pre>
-module ApplicationHelper       
-  auth_assist_helpers
-end</pre>

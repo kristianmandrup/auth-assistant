@@ -1,88 +1,123 @@
-# Auth assistant
+# Auth-Assistant
 
 This project aims to assist you in setting up a complete user login and role permission system for your Rails 3 app.
 It targets Devise as the user/login system and cancan as the permission system and my own role systems, all integrated in a powerful, yet flexible solution.
 
-__NOTE__: Aug 2010
-This project will undergo a major refactoring effort, hopefully resulting in a powerful, stable version by the end of August or thereabouts!
-Stay tuned! Until then, this project should only be looked at as a reference for ideas, inspiration etc.
+__Update Aug 21:__
+This project has undergone a major refactoring and simplification effort. I will try to take advantage of several utility gems I have created during the summer of 2010, instead of having all the code packaged as one great "code mess". This should make it much easier to extend, maintain etc.
+
+The community is most welcome to help in finishing this gem ;)
+
+In its current form, the gem is more of a showcase of the direction I want to take it. It DOES NOT currently work! 
+
+Please have patience... or help me finish this :)
 
 ## User login systems
 
-Devise has been targeted as the User login (auth/auth) system of choice.
+Auth-Assistant targets [Devise](http://github.com/plataformatec/devise) as the User login system of choice (or Authentication/Authorization - a14n, a13n )
 
 * [devise](http://github.com/plataformatec/devise) 
 
-## Permission systems 
-
-There are two similar simple but powerful permission system I plan to support:
-
-* [cancan](http://github.com/ryanb/cancan)
-* [canable](http://github.com/jnunemaker/canable) - in the future
-
-_Note:_
-You are most welcome to provide "plugins" for other similar frameworks or perhaps add role/group support or suggest any system that support grouping of roles.
-I think Document DBs such as Mongo and Riak are perfect for modeling a role group hierarchical relationship, whereas it quickly becomes something of a nightmare in a relational DB system. This is planned as part of the roles strategies integration (see below).
-
 ## Roles
 
-I am close to having developed a comprehensive, very flexible Roles strategy system that is to be fully integrated with Auth-assistant in the near future.
+I have now developed a flexible Generic Roles strategy system. This will soon be integrated with *Auth-Assistant*.
+
+* [Generic Role Strategies](http://github.com/kristianmandrup/roles_generic)
+
+Roles for popular ORMs
+
+* [Roles for Active Record](http://github.com/kristianmandrup/roles_for_ar)
+* [Roles for DataMapper](http://github.com/kristianmandrup/roles_for_dm)
+* [Roles for MongoMapper](http://github.com/kristianmandrup/roles_for_mm)
+* [Roles for Mongoid](http://github.com/kristianmandrup/roles_for_mongoid)
+
+_Role Groups_
+I think Document DBs such as *Mongo* and *Riak* are perfect for modeling a role-group hierarchical relationship. 
+It quickly becomes something of a nightmare in a relational DB system. 
+Role-Group support is planned as a future add-on for the roles strategies integration.
+
+_Note:_
+You are most welcome to provide "plugins" for any other role frameworks. Please follow the API conventions of Roles generic.
+
+## Permission systems 
+
+There will be support for multiple permission systems:
+
+* [CanCan](http://github.com/ryanb/cancan)
+* [Canable](http://github.com/jnunemaker/canable)
+
+_Note:_
+You are most welcome to provide "plugins" for other permission frameworks.
 
 ## Installation and configuration ##
 
 This gem has been designed for Rails 3 only.
 
-See _INSTALLATION.txt_ or [Installation](http://wiki.github.com/kristianmandrup/auth-assistant/installation)
+## Install gems
+
+Insert <pre>gem 'auth-assistant'</pre> in your Rails 3 Gemfile
+<pre>$ bundle install</pre>
+
+## Install as plugin
+
+In the near future...
+
+<code>rails plugin install http://github.com/kristianmandrup/auth-assistant.git</code>
 
 ## Role strategies ##
 
-For details on the available role strategies see _ROLE_STRATEGIES.txt__ or [Role strategies](http://wiki.github.com/kristianmandrup/auth-assistant/role-strategies) 
+Role strategies can be set up using the [Generic Role Strategies](http://github.com/kristianmandrup/roles_generic) gem. 
+Follow the instruction on the main page.
 
-_Update_ : Aug 2010
+_Future plans:_
+I have plans to have the main *Auth-Assistant* generator configure a role strategy of choice for the ORM of choice. 
 
-I have recently developed a [roles_generic](http://github.com/kristianmandrup/roles_generic) gem, which allows for easy setup of your models for a generic Role strategy.
-I have also recently developed a bunch of *roles_for_xxxx* gems, f.ex [roles_for_ar](http://github.com/kristianmandrup/roles_for_ar) which make it simple to add a role strategy for various ORMs. I have plans to integrate these role strategies in the very near future (by end of August, 2010).
+## Permits
 
-## Permits CanCan ##
+### CanCan
 
-Role based authorization is setup by creating 'permits' for each kind of role, in order to permit that role to do certain actions.
-The *config* generator generates a default <code>permits.rb</code> file in /lib
+Role based authorization for [CanCan](http://github.com/ryanb/cancan) is setup by creating 'permits' for each kind of role. 
+A *permit* lets a user in a given role do certain actions. 
 
-See _PERMITS.txt_ or [Permits](http://wiki.github.com/kristianmandrup/auth-assistant/permits)
+The *config* generator generates a default <code>permits.rb</code> file which is placed in /lib, which you can edit to suit your needs.
 
-## Permits Canable ##
+### Canable
 
-In Canable the permissions are by default defined in the models. I can tweak this behavior to enable the same central permission setup as I use for CanCan (which is also a tweak of the default usage setup). My current branch of Canable contains generators to setup the models and user with a Canable config. 
+In [Canable](http://github.com/jnunemaker/canable) the permissions are by default defined in the models. 
+I plan to tweak this behavior to enable the same or a similar central permission setup as I use for CanCan.
+My current branch of *Canable* contains generators to setup the models and user with a *Canable* config. 
 More to follow when I get further here...
 
-## Generators ##
+## Generators
 
 The following generators are currently available 
 
 * config - configure with new strategy
-* clear - clear existing strategy
-* views - generate partials for use in views
+* views  - generate partials for user action menu items
 
-So far they only work for Active Record as the ORM. I pkan to support other ORMs in the future such as Mongo Mapper, Mongoid and Data Mapper.
-Any help in this regard would be very much appreciated! fork ahead!
+The *config* generator should automatically setup up your project with Devise, a Roles strategy of choice a Permission system of choice and all using an ORM of your choice! 
+Auth-Assistant will support these ORMs:
+
+* Mongo Mapper
+* Mongoid 
+* Data Mapper
 
 ### Config Generator ###
 
-The *config* generator is used to configure your Rails app with a role strategy for use with CanCan and Devise.
+<code>rails g auth_assist_::config ROLE_STRATEGY [--devise] [--admin] [--orm]</code>
 
-See [Config Generator](http://wiki.github.com/kristianmandrup/auth-assistant/config-generator)
-
-### Clear Generator ###
-
-The *clear* generator is used to clear a role strategy from your Rails app so you can create a new one from a fresh starting point!
-
-See [Clear Generator](http://wiki.github.com/kristianmandrup/auth-assistant/clear-generator)
+* --devise  : run devise configure generator
+* --admin   : create admin user
+* --orm     : orm to be used
 
 ### Views Generator ###
 
-The *view* generator is used to generate views to faciliate creation of session and registration menu items.
+Moves 'user menu' partials views into app/views/_user_menu
 
-See [View Generator](http://wiki.github.com/kristianmandrup/auth-assistant/view-generator)
+<code>rails g auth_assist::views [scope] [--haml]</code>
+
+* scope  : The scope folder under views to copy the partials to, fx 'admin'
+* --haml : Use HAML as template language
 
 ## Note on Patches/Pull Requests ##
  

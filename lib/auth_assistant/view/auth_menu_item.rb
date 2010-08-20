@@ -1,27 +1,21 @@
-module AuthAssistant
-  module ViewHelpers
-    module AuthMenuItem
-      def sign_out_menu_item
-        "<li>#{sign_out_link}</li>".html_safe if current_user
-      end
+module AuthAssistant::View
+  module UserActionMenu       
 
-      def sign_in_menu_item
-        "<li>#{sign_in_link}</li>".html_safe if !current_user
-      end
+    MENU_ITEMS = {
+      :sign_out => :logout, 
+      :sign_in => :login, 
+      :sign_up, => :register,
+      :edit_registration => [:edit_user, :edit_account]
+    }
 
-      def sign_up_menu_item
-        "<li>#{sign_up_link}</li>".html_safe if !current_user
-      end
-
-      def edit_registration_menu_item
-        "<li>#{edit_registration_link}</li>".html_safe if current_user
-      end
-
-      alias_method :logout_menu_item, :sign_out_menu_item
-      alias_method :login_menu_item, :sign_in_menu_item  
-      alias_method :register_menu_item, :sign_up_menu_item    
-      alias_method :edit_user_menu_item, :edit_registration_menu_item   
-
-    end  
-  end
+    MENU_ITEMS.values.each do |name|
+      class_eval %{
+        def #{name}_menu_item tag = 'li'
+          wrap(#{name}_link, tag)
+        end          
+      }      
+    end
+  
+    aliases_for MENU_ITEMS      
+  end  
 end

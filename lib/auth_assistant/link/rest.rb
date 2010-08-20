@@ -21,8 +21,7 @@ module AuthAssistant
         end 
         o.name.pluralize.downcase
       end
-      
-            
+                  
       def create_link(object, label = nil)
         label ||= auth_labels[:new] 
         path = send :"new_#{object.class.to_s.downcase}_path"    
@@ -58,13 +57,17 @@ module AuthAssistant
           puts "no link"
         end
       end
+
+      LINKS = {
+        :list     => :index,
+        :new      => :create,
+        :destroy  => :delete,
+        :update   => :edit,
+        :read     => :show
+      }
       
-      alias_method :list_link, :index_link
-      alias_method :new_link, :create_link
-      alias_method :destroy_link, :delete_link
-      alias_method :update_link, :edit_link
-      alias_method :read_link, :show_link                  
-      
+      # alias_method :list_link, :index_link   and so on...
+      aliases_for :before => :link, LINKS           
     end    
   end
 end

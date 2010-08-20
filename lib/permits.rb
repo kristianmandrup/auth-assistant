@@ -1,3 +1,5 @@
+# This file is copied as part of the config generator execution. Edit this to your liking when it is in your Rails 3 app /lib folder.
+
 module RolePermit
 
   class Base 
