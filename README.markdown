@@ -12,6 +12,22 @@ In its current form, the gem is more of a showcase of the direction I want to ta
 
 Please have patience... or help me finish this :)
 
+## TODO 
+
+### For sept. 2010
+
+Testing:
+* Add specs, using various specs helpers (*rails-app-spec*, *generator-spec* etc.)
+* Add Cucumber (or Steak) acceptance test (see CanCan for example)
+
+Gems:
+* Update all *roles_for* ORM gems to implement Generic Roles API
+* Investigate latest changes in *CanCan* and *Devise*
+
+Plugin config:
+* Finish and use *rails3-plugin-toolbox* gem to facilitate Rails 3 plugin configuration
+* Use *Railtie* where it makes sense!
+
 ## User login systems
 
 Auth-Assistant targets [Devise](http://github.com/plataformatec/devise) as the User login system of choice (or Authentication/Authorization - a14n, a13n )

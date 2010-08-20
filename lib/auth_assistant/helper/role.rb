@@ -1,23 +1,24 @@
 module AuthAssistant::Helpers
   module Role
     # does the user have ANY of the given roles?
-    def has_role?(*user_roles)
-      union = current_user.roles & user_roles
-      !union.empty?
+    # Uses generic roles API    
+    def has_role?(*roles)
+      current_user.has_role? roles
     end
 
     # does the user have ALL of the given roles?
-    def has_roles?(*user_roles)
-      union = current_user.roles - user_roles
-      union.empty?
+    # Uses generic roles API
+    def has_roles?(roles)
+      current_user.has_roles? roles
     end
-
-    def admin?
-      has_role? :admin      
-    end
-
-    def guest?
-      has_role? :guest      
+    
+    # admin?,  guest? ...
+    AuthAssistant::Role.available.each do |role|
+      class_eval %{
+        def #{role}?
+          has_role? :#{role}
+        end        
+      }
     end
     
     def owner?(obj, relation=nil)
