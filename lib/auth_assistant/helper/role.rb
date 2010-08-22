@@ -1,4 +1,4 @@
-module AuthAssistant::Helpers
+module AuthAssistant::Helper
   module Role
     # does the user have ANY of the given roles?
     # Uses generic roles API    

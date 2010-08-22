@@ -3,7 +3,7 @@ module AuthAssistant
 
   NAMESPACES.each do |namespace|
     class_eval %{
-      Module.new #{namespace} do
+      module #{namespace.to_s.camelize}
       end
     }
   end

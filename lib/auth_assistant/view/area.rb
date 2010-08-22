@@ -1,4 +1,4 @@
-module AuthAssistant::View::Helpers
+module AuthAssistant::View
   module Area
     # create a div tag with the given class and let block render within this div
     def for_area(clazz, &block)

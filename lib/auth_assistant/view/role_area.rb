@@ -1,9 +1,10 @@
-module AuthAssistant::View::Helpers
+module AuthAssistant::View
   module Roles
     # for users WITH the given roles create a div area
     # with optional class given in options hash and render block
     # within this div  
-    def for_roles(*user_roles, options  = {}, &block)
+    def for_roles(*user_roles, options, &block)
+      options ||= {}
       not_for_roles(user_roles, &block) if options == false
       
       roles_block user_roles do
@@ -16,7 +17,8 @@ module AuthAssistant::View::Helpers
     # for users WITHOUT the given roles create a div area
     # with optional class given in options hash and render block
     # within this div  
-    def not_for_roles(*user_roles, options = {}, &block)
+    def not_for_roles(*user_roles, options, &block)
+      options ||= {}
       not_roles_block user_roles do             
         clazz = options[:class] || 'special'
         for_area(clazz, &block)
