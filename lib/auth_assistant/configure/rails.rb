@@ -12,7 +12,13 @@ Rails3::PluginExtender.new do
 
   # extend action_view with methods from some modules
   extend_rails(:view) do
-    extend_from_module AuthAssistant::Helper::View, :role, :area
+    extend_from_module AuthAssistant::View, :roles, :user_action_menu
+    extend_from_module AuthAssistant::Helper, :role
     # extend_from_module AuthAssistant::Link, :session, :registration, :rest, :session
+  end  
+  
+  after :initialize do   
+    puts "Rails app initialized"
+    require_all File.dirname(__FILE__) + '/after_init'
   end
 end

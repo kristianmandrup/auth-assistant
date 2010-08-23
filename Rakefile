@@ -10,7 +10,8 @@ begin
     gem.add_development_dependency "rspec", ">= 2.0.0.beta.19"
     gem.add_dependency "devise", ">= 1.1"    
     gem.add_dependency "cancan", ">= 1.3" 
-    gem.add_dependency "rails3_plugin_toolbox", ">= 0.3.1" 
+    gem.add_dependency "rails3_plugin_toolbox", ">= 0.3.4" 
+    gem.add_dependency "rspec-action_view", ">= 0.1.2" 
            
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
     

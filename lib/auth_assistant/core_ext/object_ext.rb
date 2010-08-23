@@ -7,5 +7,10 @@ class Object
   
   def kind_of_label? obj
     any_kind_of? obj, String, Symbol          
-  end  
+  end
+
+  def last_option *args
+    last = args.flatten.last
+    last.kind_of?(Hash) ? last : {}    
+  end
 end
