@@ -5,7 +5,6 @@ module AuthAssistant
         label ||= auth_labels[:index]                   
         puts object.inspect        
         obj = index_obj(object)
-        puts "index obj: #{obj.inspect}"   
         path = send :"#{obj}_path"    
         link = link_to(label, path) if can?(:read, object)
       end      
@@ -67,7 +66,7 @@ module AuthAssistant
       }
       
       # alias_method :list_link, :index_link   and so on...
-      aliases_for :before => :link, LINKS           
+      multi_aliases :_before_ => :link, LINKS
     end    
   end
 end

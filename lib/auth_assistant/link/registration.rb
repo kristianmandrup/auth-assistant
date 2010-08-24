@@ -8,29 +8,34 @@ module AuthAssistant::Link
     ACTIONS = [:new, :edit]
 
     # new_registration_link, edit_registration_link
-    REGISTRATION_LINKS.values.each do |name|
+    REGISTRATION_LINKS.keys.each do |name|
       class_eval %{
-        def #{name}_link(options = {})
+        def #{name}_link(options = {})          
           label = options[:label] || auth_labels[:#{name}]
           path = #{name}_path options[:role]
           link_to(label, path)
         end          
       }
-    aliases_for :before => :link, REGISTRATION_LINKS
+    end
+    multi_alias REGISTRATION_LINKS.merge(:_after_ => :link)  
 
     protected
 
     # new_registration_path, edit_registration_path
-    REGISTRATION_LINKS.values.each_with_index do |name, index|
+    REGISTRATION_LINKS.keys.each_with_index do |name, index|
       class_eval %{      
-        def #{name}_path(role) 
-          get_registration_path role, #{ACTIONS[index]}
+        def #{name}_path(role = :user) 
+          get_registration_path :#{ACTIONS[index]}, role
         end
       }
     end
 
-    def get_registration_path role, action
-      role.to_sym == :admin ? send :"#{action}_admin_registration_path" : send :"#{action}_user_registration_path"
+    def get_registration_path action, role = :user
+      user_reg_path action, role 
     end      
+    
+    def user_reg_path action, role = :user 
+      send :"#{action}_#{role}_registration_path"
+    end
   end
 end

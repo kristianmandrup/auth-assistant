@@ -16,7 +16,8 @@ module AuthAssistant::Link
           link_to(label, path)
         end          
       }
-    aliases_for :before => :link, SESSION_LINKS
+
+    multi_aliases :_before_ => :link, SESSION_LINKS
 
     protected
 

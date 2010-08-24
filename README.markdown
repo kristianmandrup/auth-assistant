@@ -10,6 +10,9 @@ It targets Devise as the user/login system and cancan as the permission system a
   * host_area_spec - host guards work (public and localhost)
   * role_area_spec - role guards work
   * role_ext_spec - role logic is made available in views
+* helper
+  * host_helper_spec - done
+  * role_helper_spec - done  
 
 Near future:
 * link helpers

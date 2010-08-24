@@ -1,5 +1,3 @@
-require 'sugar-high/alias'
-
 module AuthAssistant::View
   module UserActionMenu       
 
@@ -18,6 +16,6 @@ module AuthAssistant::View
       }      
     end
   
-    multi_alias :menu_item, MENU_ITEMS.merge(:options => :after)
+    multi_alias :menu_item, MENU_ITEMS
   end  
 end
