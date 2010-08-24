@@ -10,10 +10,12 @@ describe AuthAssistant::Link::Registration do
   
   describe '#new_registration_link' do
     it "should create a registration link" do
-      with_action_view do |view|      
-        view.stubs(:auth_labels).returns(:new_registration => 'new registration')
-        view.stubs(:user_reg_path).with(:new, :admin).returns 'new/reg/path'
-        view.stubs(:link_to).with('new registration', 'new/reg/path').returns 'it works'        
+      with_action_view do |view|           
+        label = 'new registration'
+        path = 'new/reg/path'        
+        view.stubs(:auth_labels).returns(:new_registration => label)
+        view.stubs(:user_reg_path).with(:new, :admin).returns path 
+        view.stubs(:link_to).with(label, path).returns 'it works'        
         view.new_registration_link(:role => :admin).should == 'it works'
       end    
     end

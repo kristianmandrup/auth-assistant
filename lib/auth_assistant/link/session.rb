@@ -8,7 +8,7 @@ module AuthAssistant::Link
     ACTIONS = [:destroy, :create]
 
     # new_registration_link, edit_registration_link
-    SESSION_LINKS.values.each_with_index do |name, index|
+    SESSION_LINKS.keys.each_with_index do |name, index|
       class_eval %{
         def #{name}_link(options = {})
           label = options[:label] || auth_labels[:#{name}]
@@ -16,16 +16,16 @@ module AuthAssistant::Link
           link_to(label, path)
         end          
       }
+    end
 
-    multi_aliases :_before_ => :link, SESSION_LINKS
+    multi_alias SESSION_LINKS.merge(:_after_ => :link)
 
     protected
 
     ACTIONS.each do |action|
       class_eval %{    
-        def #{action}_session_path(role)                                      
-          return send :"#{action}_\#{role}_session_path" if role && role != 'user'           
-          #{action}_user_session_path
+        def #{action}_session_path(role = :user)                                      
+          send :"#{action}_\#{role}_session_path"
         end        
       }
     end
