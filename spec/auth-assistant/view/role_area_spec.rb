@@ -1,44 +1,92 @@
+require 'rspec-action_view'
+require 'require_all'
 require 'spec_helper'
 
-require 'active_support'
-require 'action_controller'
-require 'action_view'
-# require 'active_record'
-# require 'action_mailer'
-require 'active_support/railtie'
-# require 'rails/all'
-
-module Minimal
-  class Application < Rails::Application
-    config.active_support.deprecation = :log
+module AuthAssistant
+  module View
   end
 end
 
-Rails.application = Minimal::Application
+require 'auth_assistant/view/role_area'
 
-class MyView < ActionView::Base
-  attr_accessor :current_user
-  
-  def with_output_buffer(buf = nil) #:nodoc:
-    yield
+describe AuthAssistant::View::Roles do
+  setup_action_view do
+    tests AuthAssistant::View::Roles       
   end  
-end
-
-class User
-end
-
-describe "View extensions" do
-  describe 'Role area functionality' do
-    
-    it "should extend Action View with various Roles helper methods" do
-      after_init :view do
-        :view.should be_extended_with AuthAssistant::View, :roles
-        :view.should be_extended_with AuthAssistant::Helper, :role
-      end
-
-      User.stubs(:roles).returns [:admin, :guest]
-
-      init_app_railties :minimal, :view
+  
+  describe '#area' do
+    it "display a div with content" do        
+      with_action_view do |view|      
+        view.area(:my_class) { 'hello' }.should match /hello/
+      end    
     end
   end
+
+  context 'admin user' do  
+    describe '#for_roles' do                    
+      it "display an :admin only block" do        
+        with_action_view do |view|      
+          view.stubs(:has_role?).with([:admin]).returns true          
+          view.for_roles(:admin) { 'hello' }.should match /hello/
+        end      
+      end
+      
+      it "should not display a :guest only block" do
+        with_action_view do |view|      
+          view.stubs(:has_role?).with([:guest]).returns false          
+          view.for_roles(:guest) { 'hello' }.should be_nil
+        end
+      end
+    end # desc
+
+    describe '#not_for_roles' do              
+      it "should not display a block not for :admin" do        
+        with_action_view do |view|      
+          view.stubs(:has_role?).with([:admin]).returns true
+          view.not_for_roles(:admin) { 'hello' }.should be_nil
+        end    
+      end
+    
+      it "should display a div block not for :guest" do        
+        with_action_view do |view|      
+          view.stubs(:has_role?).with([:guest]).returns false
+          view.not_for_roles(:guest) { 'hello' }.should match /hello/
+        end    
+      end                
+    end # desc
+
+    describe '#area_for_roles' do              
+      it "should display an area for :admin" do        
+        with_action_view do |view|      
+          view.stubs(:has_role?).with([:admin]).returns true
+          view.area_for_roles(:admin) { 'hello' }.should match /hello/
+        end    
+      end
+    
+      it "should not display an area for user not :admin" do        
+        with_action_view do |view|      
+          view.stubs(:has_role?).with([:admin]).returns false
+          view.area_for_roles(:admin) { 'hello' }.should be_nil
+        end    
+      end                
+    end # desc
+
+    describe '#area_not_for_roles' do              
+      it "should not display an area for user :admin" do        
+        with_action_view do |view|      
+          view.stubs(:has_role?).with([:admin]).returns true
+          view.area_not_for_roles(:admin) { 'hello' }.should be_nil
+        end    
+      end
+    
+      it "should display an area for user not :admin" do        
+        with_action_view do |view|  
+          # he is not admin    
+          view.stubs(:has_role?).with([:admin]).returns false
+          view.area_not_for_roles(:admin) { 'hello' }.should match /hello/
+        end    
+      end                
+    end # desc
+            
+  end  
 end

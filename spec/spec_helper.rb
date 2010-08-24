@@ -1,6 +1,6 @@
 require 'rspec'
 require 'rspec/autorun' 
-# require 'auth-assistant'
+require 'auth-assistant'
 
 module RSpec
   module ActionView

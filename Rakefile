@@ -12,6 +12,7 @@ begin
     gem.add_dependency "cancan", ">= 1.3" 
     gem.add_dependency "rails3_plugin_toolbox", ">= 0.3.4" 
     gem.add_dependency "rspec-action_view", ">= 0.1.2" 
+    gem.add_dependency "sugar-high", ">= 0.1.0" 
            
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
     
