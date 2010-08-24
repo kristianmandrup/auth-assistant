@@ -13,9 +13,12 @@ It targets Devise as the user/login system and cancan as the permission system a
 * helper
   * host_helper_spec - done
   * role_helper_spec - done  
+* link
+  * session (signout, signin, ...)
+  * REST (index, create, delete, show, ...)
+  * registration (signup, ...)  
 
 Near future:
-* link helpers
 * permission system 
 
 Future:
