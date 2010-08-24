@@ -46,13 +46,8 @@ module AuthAssistant::Link
     end
 
     def show_link(object, label = nil) 
-      label ||= auth_labels[:show] 
-      if can?(:read, object)
-        puts "can read: #{object}"
-        link_to(label, object)  
-      else
-        puts "no link"
-      end
+      label ||= auth_labels[:show]       
+      link_to(label, object) if can?(:read, object)
     end
 
     LINKS = {
