@@ -8,8 +8,8 @@ describe AuthAssistant::Link::Session do
     tests AuthAssistant::Link::Session
   end  
   
-  describe '#new_registration_link' do
-    it "should create a registration link" do
+  describe '#sign_out_link' do
+    it "should create a sign out link" do
       with_action_view do |view|      
         label = 'log out'
         path = 'admin/log/out'        
