@@ -3,29 +3,27 @@
 This project aims to assist you in setting up a complete user login and role permission system for your Rails 3 app.
 It targets Devise as the user/login system and cancan as the permission system and my own role systems, all integrated in a powerful, yet flexible solution.
 
-__Update Aug 21:__
-This project has undergone a major refactoring and simplification effort. I will try to take advantage of several utility gems I have created during the summer of 2010, instead of having all the code packaged as one great "code mess". This should make it much easier to extend, maintain etc.
+## Specs progress (done)
 
-The community is most welcome to help in finishing this gem ;)
+* configure/rails_spec - specs that plugin is configured correct with rails, extending View and Controller
+* view
+  * host_area_spec - host guards work (public and localhost)
+  * role_area_spec - role guards work
+  * role_ext_spec - role logic is made available in views
 
-In its current form, the gem is more of a showcase of the direction I want to take it. It DOES NOT currently work! 
+Near future:
+* link helpers
+* permission system 
 
-Please have patience... or help me finish this :)
+Future:
+* Add more specs...
+* Add *Cucumber* (or *Steak*) acceptance tests
 
-## TODO 
-
-### For sept. 2010
-
-Testing:
-* Add specs, using various specs helpers (*rails-app-spec*, *generator-spec* etc.)
-* Add Cucumber (or Steak) acceptance test (see CanCan for example)
-
-Gems:
-* Update all *roles_for* ORM gems to implement Generic Roles API
+Gems related:
+* Update all *roles_for* ORM gems to implement [Generic Role Strategies](http://github.com/kristianmandrup/roles_generic) API
 * Investigate latest changes in *CanCan* and *Devise*
 
 Plugin config:
-* Finish and use *rails3-plugin-toolbox* gem to facilitate Rails 3 plugin configuration
 * Use *Railtie* where it makes sense!
 
 ## User login systems
