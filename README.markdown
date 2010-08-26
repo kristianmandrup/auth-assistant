@@ -18,7 +18,8 @@ It targets Devise as the user/login system and cancan as the permission system a
   * REST (index, create, delete, show, ...)
   * registration (signup, ...)  
 
-Near future:
+Near future:       
+* generators - update to use latest generator-spec !!
 * permission system 
 
 Future:

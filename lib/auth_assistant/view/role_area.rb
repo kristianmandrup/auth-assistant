@@ -1,3 +1,5 @@
+require 'sugar-high/arguments'
+
 module AuthAssistant::View
   module Roles
     # for users WITH the given roles create a div area
@@ -5,12 +7,13 @@ module AuthAssistant::View
     # within this div  
     def area_for_roles(*user_roles, &block)
       options = last_option(user_roles)
+
+      return area(&block) if user_roles.empty?
       
-      not_for_roles(user_roles, &block) if options == false
+      not_for_roles(user_roles, &block) if user_roles.first == false
       
       for_roles user_roles do
-        clazz = options[:class] || 'special'          
-        area(clazz, &block)
+        area(options, &block)
       end
     end   
     alias_method :area_for_role, :area_for_roles
@@ -30,20 +33,20 @@ module AuthAssistant::View
     # execute block if user DOES have any of the given roles
     def for_roles(*user_roles, &block) 
       user_roles = user_roles.flatten
-      has_role?(user_roles) ? with_output_buffer(&block) : nil
+      yield if has_role?(user_roles) && block
     end 
     alias_method :for_role, :for_roles
 
     # execute block if user DOES NOT have any of the given roles
     def not_for_roles(*user_roles, &block)            
       user_roles = user_roles.flatten
-      !has_role?(user_roles) ? with_output_buffer(&block) : nil
+      yield if !has_role?(user_roles) && block
     end        
     alias_method :not_for_role, :not_for_roles
     
-    def area(clazz, &block)
-      content = with_output_buffer(&block)
-      content_tag :div, content, :class => clazz    
+    def area(options=nil, &block)
+      content = yield #with_output_buffer(&block)
+      content_tag :div, content, options
     end    
   end
 end

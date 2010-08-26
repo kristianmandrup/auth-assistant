@@ -16,14 +16,6 @@ end
 
 Rails.application = Minimal::Application
 
-class MyView < ActionView::Base
-  attr_accessor :current_user
-  
-  def with_output_buffer(buf = nil) #:nodoc:
-    yield
-  end  
-end
-
 class User
 end
 
