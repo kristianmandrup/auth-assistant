@@ -4,9 +4,8 @@ require 'spec_helper'
 require 'auth_assistant/helper/role'
 
 describe AuthAssistant::Helper::Role do
-  setup_action_view do
-    tests AuthAssistant::Helper::Role
-  end  
+  
+  extend_view_with AuthAssistant::Helper::Role  
   
   describe '#has_role?' do
     context 'user has role :admin' do
@@ -14,9 +13,13 @@ describe AuthAssistant::Helper::Role do
         user = stub()
         user.stubs(:has_role?).with([:admin]).returns true
 
-        with_action_view do |view|      
+        with_engine do |e, view|
           view.stubs(:current_user).returns user
-          view.has_role?(:admin).should be_true
+
+          res = e.run_template do 
+            %{<%= has_role?(:admin) %> }
+          end
+          res.should match /true/
         end    
       end
 
@@ -24,9 +27,12 @@ describe AuthAssistant::Helper::Role do
         user = stub()
         user.stubs(:has_role?).with([:guest]).returns false
 
-        with_action_view do |view|      
+        with_engine do |e, view|
           view.stubs(:current_user).returns user
-          view.has_role?(:guest).should be_false
+          res = e.run_template do 
+            %{<%= has_role?(:guest) %> }
+          end
+          res.should match /false/
         end    
       end
     end
@@ -38,9 +44,12 @@ describe AuthAssistant::Helper::Role do
         user = stub()
         user.stubs(:has_roles?).with([:admin, :guest]).returns true
 
-        with_action_view do |view|      
+        with_engine do |e, view|
           view.stubs(:current_user).returns user
-          view.has_roles?(:admin, :guest).should be_true
+          res = e.run_template do 
+            %{<%= has_roles?(:admin, :guest) %> }
+          end
+          res.should match /true/
         end    
       end
 
@@ -48,14 +57,32 @@ describe AuthAssistant::Helper::Role do
         user = stub()
         user.stubs(:has_roles?).with([:unknown, :guest]).returns false
 
-        with_action_view do |view|      
+        with_engine do |e, view|
           view.stubs(:current_user).returns user
-          view.has_roles?(:unknown, :guest).should be_false
+          res = e.run_template do 
+            %{<%= has_roles?(:unknown, :guest) %> }
+          end
+          res.should match /false/
         end    
       end
     end
   end
   
-  # describe '#owner?' do
-  # end  
+  describe '#owner?' do
+    it "should return true that kristian is the owner of the post" do
+      user = stub()
+      user.stubs(:owner).with([:unknown, :guest]).returns false
+
+
+      with_engine do |e, view|
+        view.stubs(:current_user).returns user
+        @post.stubs(:owner).returns user
+        
+        res = e.run_template_locals :post => @post do 
+          %{<%= owner?(post) %> }
+        end
+        res.should match /true/
+      end    
+    end
+  end  
 end

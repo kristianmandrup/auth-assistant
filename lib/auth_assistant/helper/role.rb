@@ -11,7 +11,9 @@ module AuthAssistant::Helper
     def has_roles?(*roles)
       current_user.has_roles? roles.flatten
     end
-        
+
+    # returns true if the current user owns the object
+    # tries default 'owner' relations if none given as an argument
     def owner?(obj, relation=nil)
       if relation     
         return true if user_relation?(obj, relation)
@@ -23,9 +25,9 @@ module AuthAssistant::Helper
 
     protected
     
-    def user_relation? user, relation
-      raise ArgumentError, "Relation must be a Symbol or String" if !relation.kind_of_label?
-      current_user == obj.send(relation) if obj.repond_to?(relation)
+    def user_relation? obj, relation
+      raise ArgumentError, "User method must be a Symbol or String" if !relation.kind_of_label?
+      current_user == obj.send(relation) if obj.respond_to? relation
     end
   end    
 end

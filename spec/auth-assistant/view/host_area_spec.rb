@@ -3,6 +3,10 @@ require 'auth_assistant/view/host_area'
 
 describe AuthAssistant::View::Host do
   extend_view_with AuthAssistant::View::Host
+
+  before do
+    @post = stub(:title => 'my post', :id => 1, :author => 'kristian' )
+  end
   
   describe '#for_localhost' do
     it "should display localhost guarded content for localhost browser agent" do
