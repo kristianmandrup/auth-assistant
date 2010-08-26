@@ -17,10 +17,10 @@ It targets Devise as the user/login system and cancan as the permission system a
   * session (signout, signin, ...)
   * REST (index, create, delete, show, ...)
   * registration (signup, ...)  
+* permission system : DONE - specs to be cleaned up soon ;)
 
 Near future:       
 * generators - update to use latest generator-spec !!
-* permission system 
 
 Future:
 * Add more specs...
