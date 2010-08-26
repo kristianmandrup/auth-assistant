@@ -21,6 +21,7 @@ module AuthAssistant::Helper
       [:user, :owner, :author].each do |relation|        
         return true if user_relation?(obj, relation)
       end
+      false
     end    
 
     protected

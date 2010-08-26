@@ -69,11 +69,22 @@ describe AuthAssistant::Helper::Role do
   end
   
   describe '#owner?' do
-    it "should return true that kristian is the owner of the post" do
+    it "should return false, since the user is NOT the owner of the post, but an other user" do
       user = stub()
-      user.stubs(:owner).with([:unknown, :guest]).returns false
+      other_user = stub()
+      with_engine do |e, view|
+        view.stubs(:current_user).returns user
+        @post.stubs(:owner).returns other_user
+        
+        res = e.run_template_locals :post => @post do 
+          %{<%= owner?(post) %> }
+        end
+        res.should match /false/
+      end    
+    end
 
-
+    it "should return true, since the user is the owner of the post (default :owner relation)" do
+      user = stub()
       with_engine do |e, view|
         view.stubs(:current_user).returns user
         @post.stubs(:owner).returns user
@@ -84,5 +95,19 @@ describe AuthAssistant::Helper::Role do
         res.should match /true/
       end    
     end
+
+    it "should return true, since the user is the owner of the post using custom ownership relation :maker" do
+      user = stub()
+      with_engine do |e, view|
+        view.stubs(:current_user).returns user
+        @post.stubs(:maker).returns user
+        
+        res = e.run_template_locals :post => @post do 
+          %{<%= owner?(post, :maker) %> }
+        end
+        res.should match /true/
+      end    
+    end
+
   end  
 end
