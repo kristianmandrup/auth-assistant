@@ -23,7 +23,7 @@ module RolePermit
     end  
   end
 
-  class User < Base
+  class Guest < Base
     def initialize(ability)
       super
     end
@@ -37,4 +37,4 @@ end
 
 
 RolePermit::Admin.new(0).permit? 0
-RolePermit::User.new(0).permit? 0
+RolePermit::Guest.new(0).permit? 0

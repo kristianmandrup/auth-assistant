@@ -1,7 +1,7 @@
 Authorization is setup by designing permits for each can of role to do certain actions.
 The config generator generates a default permits.rb file in /lib
 
-Please see "cancan 1.1 wiki":http://wiki.github.com/ryanb/cancan/upgrading-to-11 for more options 
+Please see "cancan 1.3 wiki":http://wiki.github.com/ryanb/cancan/upgrading-to-13 for more options 
 you can use in designing your Permits. The 'owns' convenience method provided, now uses the new hash option so it
 is also available in the controller using fx:
 

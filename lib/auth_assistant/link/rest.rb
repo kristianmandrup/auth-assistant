@@ -20,9 +20,10 @@ module AuthAssistant::Link
     end
                 
     def create_link(object, label = nil)
-      label ||= auth_labels[:new] 
-      path = send :"new_#{object.class.to_s.downcase}_path"    
-      link = link_to(label, path) if can?(:create, object)
+      label ||= auth_labels[:new]    
+      link_to(content, ) if can?(:create, object)      
+      # path = send :"new_#{object.class.to_s.downcase}_path"    
+      link = link_to(label, [:new, object.name.underscore.to_sym]) if can?(:create, object)
     end
 
     def edit_link(object, label = nil)

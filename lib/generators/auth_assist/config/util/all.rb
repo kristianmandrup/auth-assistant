@@ -2,11 +2,20 @@ module AuthAssist
   module Generators
     class ConfigGenerator
       module PermissionUtil
+        # def configure_permission_system
+        # end
+        
         def create_default_ability_setup
           copy_file 'ability.rb', 'app/models/ability.rb'
   
         def create_default_permits        
           copy_file 'permits.rb', 'lib/permits.rb'
+        end 
+        
+        def configure_exception_handling         
+          inject_into_file "app/controllers/application_controller.rb", :after => "ActionController::Base\n" do
+            File.read(self.class.templates_dir, 'permission_exception.rb')
+          end
         end
       end
     

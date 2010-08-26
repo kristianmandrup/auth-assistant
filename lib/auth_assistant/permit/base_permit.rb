@@ -20,8 +20,12 @@ module RolePermit
     end
     
     def owns(user, clazz, ownership_relation = :user_id, user_id_attribute = :id)
-      user_id = user.send :"#{user_id_attribute}"
-      can :manage, clazz, ownership_relation => user_id
+      begin
+        user_id = user.send :"#{user_id_attribute}"              
+      rescue
+        raise ArgumentError, "ERROR (owns) - The user of class #{user.class} does not respond to ##{user_id_attribute}"
+      end
+        can :manage, clazz, ownership_relation => user_id
     end 
 
     protected
@@ -33,42 +37,5 @@ module RolePermit
     def can_definitions
       ability.send :can_definitions
     end    
-  end
-  
-  class Admin < Base
-    def initialize(ability)
-      super
-    end
-
-    def permit?(user, request=nil)    
-      super
-      return if !role_match? user
-      
-      can :manage, :all    
-    end  
-  end
-
-  class Guest < Base
-    def initialize(ability)
-      super
-    end
-
-    def permit?(user, request=nil) 
-      super
-      return if !role_match? user
-      
-      can :read, [Comment, Post]
-      can [:update, :destroy], [Comment]
-      can :create, Article
-      
-      # owns(user, Comment)
-      
-      # a user can manage comments he/she created
-      # can :manage, Comment do |comment|
-      #   comment.try(:user) == user
-      # end            
-      
-      # can :create, Comment
-    end  
   end
 end
