@@ -3,23 +3,21 @@
 This project aims to assist you in setting up a complete user login and role permission system for your Rails 3 app.
 It targets Devise as the user/login system and cancan as the permission system and my own role systems, all integrated in a powerful, yet flexible solution.
 
-## Specs progress (done)
+## Progress (done)
 
 * configure/rails_spec - specs that plugin is configured correct with rails, extending View and Controller
 * view
   * host_area_spec - host guards work (public and localhost)
   * role_area_spec - role guards work
   * role_ext_spec - role logic is made available in views
-* helper
-  * host_helper_spec - done
-  * role_helper_spec - done  
-* link
-  * session (signout, signin, ...)
-  * REST (index, create, delete, show, ...)
-  * registration (signup, ...)  
-* permission system : DONE - specs to be cleaned up soon ;)
+
+* extracted gems:
+  * devise-links
+  * cancan-rest-links
+  * cancan-permits
 
 Near future:       
+* make sure cancan ownership relation etc work with Mongoid and Mongo Mapper. ID concept is a bit different...
 * generators - update to use latest generator-spec !!
 
 Future:
