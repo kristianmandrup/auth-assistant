@@ -6,6 +6,82 @@ require 'auth_assistant/helper/role'
 describe AuthAssistant::Helper::Role do
   
   extend_view_with AuthAssistant::Helper::Role  
+
+  context 'method auto-generated when Rails initialize based on registered roles'
+    describe '#guest_area' do              
+
+      it "should execute an Admin guarded block for :admin" do        
+        with_engine do |e, view|
+          view.stubs(:has_role?).with([:admin]).returns true
+
+          res = e.run_template do 
+            %{<%= for_admin { 'hello' } %>}
+          end        
+          res.should match /hello/
+        end
+      end
+  
+      it "should not execute an Admin guarded block for user not :admin" do        
+        with_engine do |e, view|
+          view.stubs(:has_role?).with([:admin]).returns false
+
+          res = e.run_template do 
+            %{<%= for_admin { 'hello' } %>}
+          end        
+          res.should be_empty
+        end
+      end
+    end # desc
+  end # context
+
+  context 'admin user' do  
+    describe '#for_roles' do                    
+      it "display an :admin only block" do        
+        with_engine do |e, view|
+          view.stubs(:has_role?).with([:admin]).returns true
+
+          res = e.run_template do 
+            %{<%= for_roles(:admin) { 'hello' } %>}
+          end
+          res.should match /hello/
+        end
+      end
+      
+      it "should not display a :guest only block" do
+        with_engine do |e, view|
+          view.stubs(:has_role?).with([:guest]).returns false
+
+          res = e.run_template do 
+            %{<%= for_roles(:guest) { 'hello' } %>}
+          end        
+          res.should be_empty
+        end
+      end
+    end # desc  
+  
+    describe '#not_for_roles' do              
+      it "should not display a block not for :admin" do        
+        with_engine do |e, view|
+          view.stubs(:has_role?).with([:admin]).returns true
+
+          res = e.run_template do 
+            %{<%= not_for_roles(:admin) { 'hello' } %>}
+          end        
+          res.should be_empty
+        end
+      end
+    
+      it "should display a div block not for :guest" do        
+        with_engine do |e, view|
+          view.stubs(:has_role?).with([:guest]).returns false
+
+          res = e.run_template do 
+            %{<%= not_for_roles(:guest) { 'hello' } %>}
+          end        
+          res.should match /hello/
+        end
+      end
+    end # desc
   
   describe '#has_role?' do
     context 'user has role :admin' do

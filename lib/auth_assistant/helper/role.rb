@@ -24,6 +24,20 @@ module AuthAssistant::Helper
       false
     end    
 
+    # execute block if user DOES have any of the given roles
+    def for_roles(*user_roles, &block) 
+      user_roles = user_roles.flatten
+      yield if has_role?(user_roles) && block
+    end 
+    alias_method :for_role, :for_roles
+
+    # execute block if user DOES NOT have any of the given roles
+    def not_for_roles(*user_roles, &block)            
+      user_roles = user_roles.flatten
+      yield if !has_role?(user_roles) && block
+    end        
+    alias_method :not_for_role, :not_for_roles
+
     protected
     
     def user_relation? obj, relation

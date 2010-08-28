@@ -1,7 +1,7 @@
 require 'sugar-high/arguments'
 
 module AuthAssistant::View
-  module Roles
+  module Role
     # for users WITH the given roles create a div area
     # with optional class given in options hash and render block
     # within this div  
@@ -29,20 +29,6 @@ module AuthAssistant::View
       end
     end  
     alias_method :area_not_for_role, :area_not_for_roles
-
-    # execute block if user DOES have any of the given roles
-    def for_roles(*user_roles, &block) 
-      user_roles = user_roles.flatten
-      yield if has_role?(user_roles) && block
-    end 
-    alias_method :for_role, :for_roles
-
-    # execute block if user DOES NOT have any of the given roles
-    def not_for_roles(*user_roles, &block)            
-      user_roles = user_roles.flatten
-      yield if !has_role?(user_roles) && block
-    end        
-    alias_method :not_for_role, :not_for_roles
     
     def area(options=nil, &block)
       content = yield #with_output_buffer(&block)

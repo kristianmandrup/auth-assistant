@@ -11,7 +11,7 @@ module AuthAssistant::View
     MENU_ITEMS.keys.each do |name|
       class_eval %{
         def #{name}_menu_item tag = 'li'
-          wrap(#{name}_link, tag)
+          content_tag tag, #{name}_link
         end          
       }      
     end
