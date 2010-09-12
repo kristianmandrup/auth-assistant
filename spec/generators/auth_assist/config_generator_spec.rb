@@ -31,7 +31,7 @@ describe 'role strategy generator: admin_flag' do
     describe "Configure Rails 3 app with Cream using default options" do
       before do        
         @generator = with_generator do |g|
-          g.run_generator arguments.args
+          g.run_generator 'cream:config --strategy admin_flag '.args
         end
         
         it "should generate a Devise User with only a :guest role using :role_string strategy"

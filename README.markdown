@@ -6,6 +6,9 @@ It targets Devise as the user/login system and cancan as the permission system a
 ## Status
 
 The current version should work as is. The permission system can be integrated nicely with the *roles* gems (see below).
+Generators still need some work.
+
+Considering renaming this project to 'cream'. 
 
 ## Session systems
 
@@ -112,6 +115,9 @@ Auth-Assistant will support these ORMs:
 * Acive Record
 
 _NOTE_: Generators need more testing. The latest *generator-spec* and other supporting utils I've created should make it a breeze... ;)
+
+Just updated the config generator, which is now called 'cream'. The goal is to make it setup appropriate gems in the project and run various generators to create a full, compatible integration of all the systems (devise, cancan, permissions and roles).
+Testing of generators to be done ASAP.  
 
 ### Config Generator ###
 
