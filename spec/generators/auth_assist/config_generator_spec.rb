@@ -10,10 +10,10 @@ describe 'role strategy generator: admin_flag' do
     setup_generator 'roles_generator' do
       tests Cream::Generators::RolesGenerator
     end    
-    remove_permits  :all
-    remove_locale   :auth_assist
+    remove_all_permits
+    remove_locale :auth_assist
     
-    remove_content_from controller_file(:application) do
+    remove_from controller_file(:application) do
           %{
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -24,7 +24,7 @@ describe 'role strategy generator: admin_flag' do
   end
 
   after :each do
-    remove_permits
+    remove_all_permits
   end
 
   context 'Clean app' do      

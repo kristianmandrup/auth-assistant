@@ -3,57 +3,32 @@
 This project aims to assist you in setting up a complete user login and role permission system for your Rails 3 app.
 It targets Devise as the user/login system and cancan as the permission system and my own role systems, all integrated in a powerful, yet flexible solution.
 
-## Progress (done)
+## Status
 
-* configure/rails_spec - specs that plugin is configured correct with rails, extending View and Controller
-* view
-  * host_area_spec - host guards work (public and localhost)
-  * role_area_spec - role guards work
-  * role_ext_spec - role logic is made available in views
+The current version should work as is. The permission system can be integrated nicely with the *roles* gems (see below).
 
-* extracted gems:
-  * devise-links
-  * cancan-rest-links
-  * cancan-permits
+## Session systems
 
-Near future:       
-* make sure cancan ownership relation etc work with Mongoid and Mongo Mapper. ID concept is a bit different...
-* generators - update to use latest generator-spec !!
-
-Future:
-* Add more specs...
-* Add *Cucumber* (or *Steak*) acceptance tests
-
-Gems related:
-* Update all *roles_for* ORM gems to implement [Generic Role Strategies](http://github.com/kristianmandrup/roles_generic) API
-* Investigate latest changes in *CanCan* and *Devise*
-
-Plugin config:
-* Use *Railtie* where it makes sense!
-
-## User login systems
-
-Auth-Assistant targets [Devise](http://github.com/plataformatec/devise) as the User login system of choice (or Authentication/Authorization - a14n, a13n )
+Auth-Assistant targets [Devise](http://github.com/plataformatec/devise) as the Session system of choice (or Authentication/Authorization - a14n, a13n )
 
 * [devise](http://github.com/plataformatec/devise) 
 
 ## Roles
 
-I have now developed a flexible Generic Roles strategy system. This will soon be integrated with *Auth-Assistant*.
+I have developed a flexible *Generic Roles* strategy system.
 
 * [Generic Role Strategies](http://github.com/kristianmandrup/roles_generic)
 
 Roles for popular ORMs
 
-* [Roles for Active Record](http://github.com/kristianmandrup/roles_for_ar)
-* [Roles for DataMapper](http://github.com/kristianmandrup/roles_for_dm)
-* [Roles for MongoMapper](http://github.com/kristianmandrup/roles_for_mm)
+* [Roles for Active Record](http://github.com/kristianmandrup/roles_active_record)
+* [Roles for DataMapper](http://github.com/kristianmandrup/roles_data_mapper)
+* [Roles for MongoMapper](http://github.com/kristianmandrup/roles_mongo_mapper)
 * [Roles for Mongoid](http://github.com/kristianmandrup/roles_for_mongoid)
 
 _Role Groups_
-I think Document DBs such as *Mongo* and *Riak* are perfect for modeling a role-group hierarchical relationship. 
-It quickly becomes something of a nightmare in a relational DB system. 
-Role-Group support is planned as a future add-on for the roles strategies integration.
+Document DBs such as *Mongo* and *Riak* are good for modeling a role-group hierarchical relationship. 
+Role-Group support is planned as a future add-on for the roles strategies integration. (Any assistance appreciated!)
 
 _Note:_
 You are most welcome to provide "plugins" for any other role frameworks. Please follow the API conventions of Roles generic.
@@ -62,8 +37,8 @@ You are most welcome to provide "plugins" for any other role frameworks. Please 
 
 There will be support for multiple permission systems:
 
-* [CanCan](http://github.com/ryanb/cancan)
-* [Canable](http://github.com/jnunemaker/canable)
+* [CanCan](http://github.com/ryanb/cancan) - currently supported
+* [Canable](http://github.com/jnunemaker/canable) - planned
 
 _Note:_
 You are most welcome to provide "plugins" for other permission frameworks.
@@ -72,12 +47,12 @@ You are most welcome to provide "plugins" for other permission frameworks.
 
 This gem has been designed for Rails 3 only.
 
-## Install gems
+### Install gems
 
 Insert <pre>gem 'auth-assistant'</pre> in your Rails 3 Gemfile
 <pre>$ bundle install</pre>
 
-## Install as plugin
+### Install as plugin
 
 In the near future...
 
@@ -85,13 +60,14 @@ In the near future...
 
 ## Role strategies ##
 
-Role strategies can be set up using the [Generic Role Strategies](http://github.com/kristianmandrup/roles_generic) gem. 
-Follow the instruction on the main page.
+Role strategies can be set up using the [Generic Role Strategies](http://github.com/kristianmandrup/roles_generic) gem or any of the ORM specific roles gems such as [Roles for Active Record](http://github.com/kristianmandrup/roles_active_record). 
 
 _Future plans:_
 I have plans to have the main *Auth-Assistant* generator configure a role strategy of choice for the ORM of choice. 
 
 ## Permits
+
+Currently only CanCan is supported as the permission system.
 
 ### CanCan
 
@@ -115,11 +91,15 @@ The following generators are currently available
 * views  - generate partials for user action menu items
 
 The *config* generator should automatically setup up your project with Devise, a Roles strategy of choice a Permission system of choice and all using an ORM of your choice! 
+
 Auth-Assistant will support these ORMs:
 
 * Mongo Mapper
 * Mongoid 
 * Data Mapper
+* Acive Record
+
+_NOTE_: Generators need more testing. The latest *generator-spec* and other supporting utils I've created should make it a breeze... ;)
 
 ### Config Generator ###
 
@@ -128,6 +108,10 @@ Auth-Assistant will support these ORMs:
 * --devise  : run devise configure generator
 * --admin   : create admin user
 * --orm     : orm to be used
+
+Example
+
+<code>rails g auth_assist:config admin_flag --devise --admin --orm AR</code>
 
 ### Views Generator ###
 
