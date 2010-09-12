@@ -43,6 +43,18 @@ There will be support for multiple permission systems:
 _Note:_
 You are most welcome to provide "plugins" for other permission frameworks.
 
+## ORMs
+
+In general, it should now finally be pretty easy to set up a Rails 3 app, with a full Session system, Permission system linked to a Role strategy system using any ORM. Devise supports the following ORMS:
+
+* Active Record
+* Data Mapper
+* Mongo Mapper
+* Mongoid
+
+These ORMs are also supported for the Roles strategy system. The Permission system should not have any ORM dependency.
+There are plans to create a top-level generator which sets up your project with all these systems for a given ORM.
+
 ## Installation and configuration ##
 
 This gem has been designed for Rails 3 only.
