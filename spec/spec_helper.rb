@@ -1,5 +1,4 @@
-require 'rspec'
-require 'rspec/autorun' 
+require 'rspec/core'
 require 'auth-assistant'
 require 'rspec-action_view'
 
