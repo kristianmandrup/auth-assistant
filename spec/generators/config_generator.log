@@ -1,0 +1,130 @@
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: ../../../../config/locales/en.yml
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: ../../../../config/locales/en.yml
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/config/locales/en.yml
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/config/locales/en.yml
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: config/locales/en.yml
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: config/locales/en.yml
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/config/locales/en.yml
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/config/locales/en.yml
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
+create_users
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+configure_roles for orm: active_record, strategy: cream:config, roles: 
+using generator active_record:roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+rails g active_record:roles --strategy cream:config --roles  --default-roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+rails g active_record:roles --strategy cream:config --roles  --default-roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+rails g active_record:roles --strategy admin_flag --roles  --default-roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+rails g active_record:roles --strategy admin_flag --roles  --default-roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+rails g active_record:roles --strategy admin_flag --roles  --default-roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+rails g active_record:roles --strategy admin_flag --roles  --default-roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
+[Rails::Assist::Logging]
+main flow
+Devise users OK
+rails g active_record:roles --strategy admin_flag --roles  --default-roles
+configure_permission_system
+configure_locale, copy from: /Users/Kristian/ruby-code/Gems/auth-assistant/config/locales/en.yml
+notify_create_users
