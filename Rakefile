@@ -7,7 +7,9 @@ begin
     gem.email = "kmandrup@gmail.com"
     gem.homepage = "http://github.com/kristianmandrup/devise-assistant"
     gem.authors = ["Kristian Mandrup"]
-    gem.add_development_dependency "rspec", "~> 2.0.0.beta.22"
+    gem.add_development_dependency "rspec",           "~> 2.0.0.beta.22"
+    gem.add_development_dependency "rails-app-spec",  "~> 0.2.6"
+
     gem.add_dependency "devise",            "~> 1.1.2"    
     gem.add_dependency "cancan",            "~> 1.3.4" 
     gem.add_dependency "r3_plugin_toolbox", "~> 0.3.6" 

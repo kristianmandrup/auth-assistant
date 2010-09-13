@@ -76,7 +76,7 @@ module Cream::Generators
         configure_locale
         handle_devise_users
       else
-        logger.warning 'Devise users not there!'        
+        logger.warn 'Devise users not there!'        
       end
     end
 
