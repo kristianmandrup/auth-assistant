@@ -1,4 +1,5 @@
-require 'rspec/core'    
+require 'rspec'
+require 'rspec/autorun'     
 require 'generator-spec'
 require 'auth-assistant'
 
