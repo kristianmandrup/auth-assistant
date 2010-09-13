@@ -39,9 +39,9 @@ module Cream
         init_devise if init_devise?
         configure_devise_gems
         create_users
-        configure_roles if roles_config?       
-        configure_permission_system if permission_config?
-        configure_locale
+        # configure_roles if roles_config?       
+        # configure_permission_system if permission_config?
+        # configure_locale
       end
 
       # -----------------      

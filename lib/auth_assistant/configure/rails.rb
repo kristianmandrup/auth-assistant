@@ -1,7 +1,7 @@
 require 'active_support/railtie'
-require 'rails3_plugin_toolbox'
+require 'r3_plugin_toolbox'
 
-Rails3::PluginExtender.new do
+Rails3::Plugin::Extender.new do
   # extend action_controller with methods from some modules
   # extend_rails(:controller) do
   #   extend_from_module AuthAssistant, :role
