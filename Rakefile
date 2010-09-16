@@ -12,8 +12,8 @@ begin
     gem.add_dependency "cancan",            "~> 1.3.4" 
     gem.add_dependency "r3_plugin_toolbox", "~> 0.3.6" 
     gem.add_dependency "rspec-action_view", "~> 0.3.1" 
-    gem.add_dependency "sugar-high",        "~> 0.2.5" 
-    gem.add_dependency "activesupport",     "~> 3.0.0"
+    gem.add_dependency "sugar-high",        "~> 0.2.7" 
+    gem.add_dependency "rails",             "~> 3.0.0"
     gem.add_dependency "rails3_artifactor", "~> 0.2.0"
     gem.add_dependency 'logging_assist',    "~> 0.1.2"
      
