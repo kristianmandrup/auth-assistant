@@ -3,6 +3,8 @@ require_generator :cream => :config
 
 LOGFILE = File.expand_path File.dirname(__FILE__) + '/../../config_generator.log'
 
+puts "Logfile at: #{LOGFILE}"
+
 describe 'role strategy generator: admin_flag' do
   use_helpers :model, :controller, :permit, :files, :file  
 
@@ -42,7 +44,6 @@ describe 'role strategy generator: admin_flag' do
     before do    
       puts "Running generator"
       Dir.chdir Rails.root do
-        puts "Logfile at: #{logfile}"
         @generator = with_generator do |g|
           arguments = "--strategy admin_flag --logfile #{LOGFILE}".args 
           puts "arguments: #{arguments}"
@@ -53,42 +54,9 @@ describe 'role strategy generator: admin_flag' do
       
     it "should generate a Devise User with only a :guest role using :role_string strategy" do
       @generator.should_not generate_model :user
+      @generator.should have_gems :devise, :cancan, :roles_active_record
     end # it
-  end
-  
-  describe "Configure Rails 3 app with Cream using default options" do
-    before do    
-      puts "Running generator"
-      Dir.chdir Rails.root do
-        
-        puts "Logfile at: #{logfile}"
-        @generator = with_generator do |g|
-          arguments = "--strategy admin_flag --logfile #{LOGFILE}".args 
-          puts "arguments: #{arguments}"
-          g.run_generator arguments
-        end
-      end
-    end # before
-      
-    it "should generate a Devise User with only a :guest role using :role_string strategy" do
-      @generator.should_not generate_model :user do |clazz|
-        # clazz.should have_devise_options :defaults
-
-        # clazz.should use_roles :generic
-        # clazz.should include_module 'Roles::Generic'
-        # clazz.should have_call :roles,          :args => ':guest'
-        # clazz.should have_call :role_strategy,  :args => ":role_string"
-      end
-    end # it  
-  
-    # it "should generate a Devise Admin user" do
-    #   @generator.should generate_model :admin do |clazz|
-    #     # clazz.should use_roles    :generic
-    #     # clazz.should include_module 'Roles::Generic'
-    #     clazz.should inherit_from :user
-    #   end        
-    # end # it
-  end # desc
+  end # desc  
 end # desc
 
 
