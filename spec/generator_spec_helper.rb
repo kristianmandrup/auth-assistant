@@ -1,5 +1,7 @@
 require 'rspec/core'    
 require 'generator-spec'
+require 'devise-spec'
+require 'roles-spec'
 require 'auth-assistant'
 
 RSpec::Generator.configure do |config|

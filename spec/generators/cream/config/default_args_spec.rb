@@ -1,23 +1,12 @@
 require 'generator_spec_helper'
 require_generator :cream => :config
 
-LOGFILE = File.expand_path File.dirname(__FILE__) + '/../../config_generator.log'
+LOGFILE = File.expand_path File.dirname(__FILE__) + '/../../config_generator-default.log'
 
 puts "Logfile at: #{LOGFILE}"
 
 describe 'role strategy generator: admin_flag' do
   use_helpers :model, :controller, :permit, :files, :file  
-
-  before do
-    # Dir.chdir Rails.root.path + '/../' do
-    #   FileUtils.rm_rf "rails_app"
-    #   exec "rails new rails_app --force"
-    # end
-  end
-
-  # after do
-  #   FileUtils.rm_rf Rails.root
-  # end
   
   before :each do              
     setup_generator 'roles_generator' do

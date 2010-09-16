@@ -1,17 +1,19 @@
 require 'generator_spec_helper'
 require_generator :cream => :config
 
-describe 'role strategy generator: admin_flag' do
-  use_helpers :model, :controller, :permits
+LOGFILE = File.expand_path File.dirname(__FILE__) + '/../../config_generator-init.log'
+
+describe 'Cream config generator: strategy "admin_flag", init Devise user model User' do
+  use_helpers :model, :controller, :permit, :files, :file
   
   before :each do              
-    setup_generator 'roles_generator' do
-      tests Cream::Generators::RolesGenerator
+    setup_generator 'config_generator' do
+      tests Cream::Generators::ConfigGenerator
     end    
     remove_all_permits
     remove_locale :auth_assist
     
-    remove_from controller_file(:application) do
+    File.remove_from controller_file(:application) do
           %{
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -39,7 +41,7 @@ describe 'role strategy generator: admin_flag' do
       
     it "should generate a Devise User with only a :guest role using :role_string strategy" do
       @generator.should generate_model :user do |clazz|
-        # clazz.should have_devise_options :defaults
+        clazz.should have_default_devise_options
 
         # clazz.should use_roles :generic
         # clazz.should include_module 'Roles::Generic'
@@ -55,4 +57,5 @@ describe 'role strategy generator: admin_flag' do
     #     clazz.should inherit_from :user
     #   end        
     # end # it
-  end # descend
+  end # desc
+end

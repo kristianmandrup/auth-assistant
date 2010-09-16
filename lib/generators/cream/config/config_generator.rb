@@ -10,17 +10,6 @@ end
 
 require 'generators/cream/config/helpers'
 
-# module Rails::Assist::BasicLogging
-#   def log
-#     @log ||= Rails::Assist::Logging.new 
-#   end  
-# end
-
-# def logger
-#   @log ||= Rails::Assist::Logging.new 
-# end  
-
-
 module Cream::Generators 
   class ConfigGenerator < Rails::Generators::Base
     extend Rails3::Assist::UseMacro
@@ -128,10 +117,10 @@ module Cream::Generators
 
     def create_users
       logger.debug 'create_users'      
-      exec "rails g devise User"
+      run "rails g devise User"
       if user_admin?
         logger.debug 'create devise Admin user'              
-        exec "rails g model Admin"
+        run "rails g model Admin"
         File.replace_content_from model_file(:admin), where => /Admin/, with => 'Admin < User'
       end
     end
