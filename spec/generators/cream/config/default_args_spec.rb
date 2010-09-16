@@ -1,6 +1,10 @@
 require 'generator_spec_helper'
 require_generator :cream => :config
 
+LOGFILE = File.expand_path File.dirname(__FILE__) + '/../../config_generator.log'
+
+puts "Logfile at: #{LOGFILE}"
+
 describe 'role strategy generator: admin_flag' do
   use_helpers :model, :controller, :permit, :files, :file  
 
@@ -40,11 +44,8 @@ describe 'role strategy generator: admin_flag' do
     before do    
       puts "Running generator"
       Dir.chdir Rails.root do
-        logfile = File.expand_path File.dirname(__FILE__) + '/../../config_generator.log'
-        puts "Logfile at: #{logfile}"
         @generator = with_generator do |g|
-          logfile_arg = "--logfile #{logfile}"
-          arguments = "--strategy admin_flag #{logfile_arg}".args 
+          arguments = "--strategy admin_flag --logfile #{LOGFILE}".args 
           puts "arguments: #{arguments}"
           g.run_generator arguments
         end
@@ -52,24 +53,10 @@ describe 'role strategy generator: admin_flag' do
     end # before
       
     it "should generate a Devise User with only a :guest role using :role_string strategy" do
-      @generator.should generate_model :user do |clazz|
-        # clazz.should have_devise_options :defaults
-
-        # clazz.should use_roles :generic
-        # clazz.should include_module 'Roles::Generic'
-        # clazz.should have_call :roles,          :args => ':guest'
-        # clazz.should have_call :role_strategy,  :args => ":role_string"
-      end
+      @generator.should_not generate_model :user
+      @generator.should have_gems :devise, :cancan, :roles_active_record
     end # it
-
-    # it "should generate a Devise Admin user" do
-    #   @generator.should generate_model :admin do |clazz|
-    #     # clazz.should use_roles    :generic
-    #     # clazz.should include_module 'Roles::Generic'
-    #     clazz.should inherit_from :user
-    #   end        
-    # end # it
-  end # desc
+  end # desc  
 end # desc
 
 
